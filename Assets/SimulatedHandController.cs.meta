@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 81819d50ad24fc34885d7760b44e137f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - trainerPrompt: {instanceID: 0}
+  - repCounterText: {instanceID: 0}
+  - targetPose: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

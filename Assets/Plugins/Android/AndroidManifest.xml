@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.usri2025.rehabtrainer">
+
+    <!-- Internet Access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Oculus/Meta-specific XR feature flags -->
+    <uses-feature android:name="android.hardware.vr.headtracking" android:required="false" />
+    <uses-feature android:name="oculus.software.handtracking" android:required="false" />
+    <uses-feature android:name="android.hardware.vr.high_performance" android:required="true" />
+    <uses-feature android:name="android.hardware.vr.mode" android:required="true" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/app_icon"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+        android:resizeableActivity="false"
+        android:supportsRtl="true">
+
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:screenOrientation="landscape"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

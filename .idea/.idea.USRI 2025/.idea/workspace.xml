@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/DesertLightweightPipeline.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/DesertLightweightPipeline.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Blue.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Blue.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Red.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Red.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Reflective.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/Reflective.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/SkyBox.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/SkyBox.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/WebXR.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Materials/WebXR.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/Desert Environment.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/Desert Environment/desert-environment.mtl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/Desert Environment/desert-environment.mtl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/Desert Environment/desert-environment.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/Desert Environment/desert-environment.obj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Materials/Saguaro_BaseColor 1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Materials/Saguaro_BaseColor 1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Saguaro.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Saguaro.obj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Saguaro_BaseColor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/cactus/Saguaro_BaseColor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/Materials/PipeOrganCactus_BaseColor.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/Materials/PipeOrganCactus_BaseColor.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/PipeOrganCactus.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/PipeOrganCactus.obj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/PipeOrganCactus_BaseColor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Models/pipeorgancactus/PipeOrganCactus_BaseColor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/PhysicMaterials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/PhysicMaterials/Sandy.physicMaterial" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/PhysicMaterials/Sandy.physicMaterial.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/PhysicMaterials/Smooth.physicMaterial" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/PhysicMaterials/Smooth.physicMaterial.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Scripts/DesertControllerInteraction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Scripts/DesertControllerInteraction.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Scripts/DesertFreeFlightController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Scripts/DesertFreeFlightController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Sounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Sounds/wind-soundscape.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Sounds/wind-soundscape.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Textures/foxr_tex.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Textures/foxr_tex.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Textures/webxr-logo-square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/Textures/webxr-logo-square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/WebXR.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Samples/Desert/WebXR.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Scripts/Trainer.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WebXR/Scripts/WebXR.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WebXR/Scripts/WebXR.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/USRI 2025.sln" beforeDir="false" afterPath="$PROJECT_DIR$/USRI 2025.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebXR.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebXR.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/WebXR.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/WebXR.csproj.AssemblyReference.cache" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/DebugXRInputs.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RuntimeInputAssetAssigner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SimulatedHandController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/WebXR/Scripts/TrainerDialogueManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/WebXR/Scripts/WebXRManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.interaction.toolkit@2.6.4/Runtime/Inputs/InputActionManager.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2wVQB9AaibKYHVUS3AouwaBYW69" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.61f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\Mario\USRI 2025&quot; -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Mario\USRI 2025" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.61f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\Mario\USRI 2025&quot; -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Mario\USRI 2025" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="" />
+      <created>1746124123132</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746124123132</updated>
+      <workItem from="1746124125963" duration="321000" />
+      <workItem from="1746750204453" duration="27000" />
+      <workItem from="1746793834263" duration="515000" />
+      <workItem from="1746801851228" duration="133000" />
+      <workItem from="1746802247276" duration="153000" />
+      <workItem from="1746802435951" duration="493000" />
+      <workItem from="1746803799555" duration="264000" />
+      <workItem from="1746805009806" duration="1409000" />
+      <workItem from="1746810488028" duration="2121000" />
+      <workItem from="1746813766169" duration="110000" />
+      <workItem from="1746815108785" duration="647000" />
+      <workItem from="1746818059957" duration="171000" />
+      <workItem from="1746820801472" duration="106000" />
+      <workItem from="1746821876069" duration="56000" />
+      <workItem from="1746847588884" duration="47000" />
+      <workItem from="1747062198846" duration="117000" />
+      <workItem from="1747063603589" duration="110000" />
+      <workItem from="1747073372927" duration="339000" />
+      <workItem from="1747073777059" duration="44000" />
+      <workItem from="1747074222115" duration="206000" />
+      <workItem from="1747075109822" duration="22000" />
+      <workItem from="1747076205179" duration="39000" />
+      <workItem from="1747077134454" duration="99000" />
+      <workItem from="1747077760670" duration="847000" />
+      <workItem from="1747079496198" duration="150000" />
+      <workItem from="1747141245206" duration="120000" />
+      <workItem from="1747141863530" duration="65000" />
+      <workItem from="1747142212131" duration="86000" />
+      <workItem from="1747142634621" duration="35000" />
+      <workItem from="1747143148237" duration="693000" />
+      <workItem from="1747144233263" duration="47000" />
+      <workItem from="1747145103915" duration="16000" />
+      <workItem from="1747145946695" duration="10000" />
+      <workItem from="1747145976563" duration="23000" />
+      <workItem from="1747146623469" duration="38000" />
+      <workItem from="1747148189034" duration="36000" />
+      <workItem from="1747149407139" duration="326000" />
+      <workItem from="1747158263107" duration="8000" />
+      <workItem from="1747159432131" duration="89000" />
+      <workItem from="1747160088455" duration="5000" />
+      <workItem from="1747160170155" duration="92000" />
+      <workItem from="1747160788022" duration="166000" />
+      <workItem from="1747161799136" duration="21000" />
+      <workItem from="1747163238768" duration="37000" />
+      <workItem from="1747163935082" duration="7000" />
+      <workItem from="1747165251240" duration="34000" />
+      <workItem from="1747165324906" duration="4000" />
+      <workItem from="1747166191308" duration="21000" />
+      <workItem from="1747230862770" duration="40000" />
+      <workItem from="1747231974471" duration="33000" />
+      <workItem from="1747232706754" duration="62000" />
+      <workItem from="1747233568697" duration="11000" />
+      <workItem from="1747236037349" duration="58000" />
+      <workItem from="1747246889875" duration="17000" />
+      <workItem from="1747247050428" duration="179000" />
+      <workItem from="1747248900897" duration="39000" />
+      <workItem from="1747250419571" duration="67000" />
+      <workItem from="1747252296424" duration="336000" />
+      <workItem from="1747316287268" duration="90000" />
+      <workItem from="1747316710015" duration="860000" />
+      <workItem from="1747318893218" duration="151000" />
+      <workItem from="1747320285263" duration="147000" />
+      <workItem from="1747321082892" duration="143000" />
+      <workItem from="1747321606099" duration="39000" />
+      <workItem from="1747328757062" duration="169000" />
+      <workItem from="1747330529650" duration="43000" />
+      <workItem from="1747331064745" duration="229000" />
+      <workItem from="1747332522352" duration="35000" />
+      <workItem from="1747336814714" duration="38000" />
+      <workItem from="1747338716918" duration="38000" />
+      <workItem from="1747401241347" duration="133000" />
+      <workItem from="1747402888863" duration="87000" />
+      <workItem from="1747404003485" duration="97000" />
+      <workItem from="1747405682156" duration="41000" />
+      <workItem from="1747405838526" duration="67000" />
+      <workItem from="1747406679650" duration="53000" />
+      <workItem from="1747408241772" duration="135000" />
+      <workItem from="1747410034655" duration="16000" />
+      <workItem from="1747416399748" duration="51000" />
+      <workItem from="1747416957685" duration="24000" />
+      <workItem from="1747417355236" duration="249000" />
+      <workItem from="1747418641191" duration="124000" />
+      <workItem from="1747421220975" duration="62000" />
+      <workItem from="1747422358964" duration="27000" />
+      <workItem from="1747423500397" duration="101000" />
+      <workItem from="1747424276621" duration="223000" />
+      <workItem from="1747426082935" duration="33000" />
+      <workItem from="1747426648633" duration="65000" />
+      <workItem from="1747427627965" duration="41000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
