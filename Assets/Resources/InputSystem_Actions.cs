@@ -1048,9 +1048,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""TriggerAction"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""e5297459-bc4e-493d-82d8-c8a53e7dd04c"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -1126,6 +1126,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""BackAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d02e9bc-a0eb-475f-91b8-36b2ab206104"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1238,6 +1247,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""TriggerAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""747a544e-11d1-4a21-9a32-7a902fb8f2ad"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1340,6 +1360,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_SimulatedHandMap_Click = m_SimulatedHandMap.FindAction("Click", throwIfNotFound: true);
         m_SimulatedHandMap_TrackedDevicePosition = m_SimulatedHandMap.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_SimulatedHandMap_TrackedDeviceOrientation = m_SimulatedHandMap.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_SimulatedHandMap_BackAction = m_SimulatedHandMap.FindAction("BackAction", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1811,6 +1832,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_SimulatedHandMap_Click;
     private readonly InputAction m_SimulatedHandMap_TrackedDevicePosition;
     private readonly InputAction m_SimulatedHandMap_TrackedDeviceOrientation;
+    private readonly InputAction m_SimulatedHandMap_BackAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "SimulatedHandMap".
     /// </summary>
@@ -1862,6 +1884,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "SimulatedHandMap/TrackedDeviceOrientation".
         /// </summary>
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_SimulatedHandMap_TrackedDeviceOrientation;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/BackAction".
+        /// </summary>
+        public InputAction @BackAction => m_Wrapper.m_SimulatedHandMap_BackAction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1918,6 +1944,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @BackAction.started += instance.OnBackAction;
+            @BackAction.performed += instance.OnBackAction;
+            @BackAction.canceled += instance.OnBackAction;
         }
 
         /// <summary>
@@ -1959,6 +1988,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @BackAction.started -= instance.OnBackAction;
+            @BackAction.performed -= instance.OnBackAction;
+            @BackAction.canceled -= instance.OnBackAction;
         }
 
         /// <summary>
@@ -2283,5 +2315,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BackAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBackAction(InputAction.CallbackContext context);
     }
 }

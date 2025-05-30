@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SimulatedHandMenuSelector : MonoBehaviour
 {
@@ -14,26 +13,38 @@ public class SimulatedHandMenuSelector : MonoBehaviour
 
     private bool wasTriggerPressed = false;
 
+    void OnEnable()
+    {
+        if (triggerAction.action != null)
+        {
+            triggerAction.action.Enable();
+            Debug.Log("[SimHand] TriggerAction enabled manually.");
+        }
+        else
+        {
+            Debug.LogError("[SimHand] TriggerAction is null in OnEnable!");
+        }
+    }
+
     void Update()
     {
-        // Safety checks
         if (triggerAction.action == null)
         {
-            Debug.LogWarning("[SimHand] Trigger Action not assigned.");
+            Debug.LogError("[SimHand] TriggerAction is not assigned.");
             return;
         }
 
-        if (rayInteractor == null)
-        {
-            Debug.LogWarning("[SimHand] RayInteractor not assigned.");
-            return;
-        }
-
-        // Read trigger state
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool isTriggerPressed = triggerValue > 0.5f;
 
-        // Raycast UI check
+        Debug.Log($"[SimHand] Trigger Value = {triggerValue}");
+
+        if (rayInteractor == null)
+        {
+            Debug.LogError("[SimHand] rayInteractor is not assigned.");
+            return;
+        }
+
         if (rayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult result))
         {
             if (result.gameObject != null)
@@ -42,26 +53,14 @@ public class SimulatedHandMenuSelector : MonoBehaviour
 
                 if (isTriggerPressed && !wasTriggerPressed)
                 {
-                    Button button = result.gameObject.GetComponent<Button>();
-                    if (button != null)
-                    {
-                        Debug.Log($"[SimHand] Trigger clicked: {button.name}");
-                        button.onClick.Invoke();
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"[SimHand] Raycast hit {result.gameObject.name}, but it has no Button component.");
-                    }
+                    Debug.Log("[SimHand] Trigger pressed — submitting click.");
+                    ExecuteEvents.Execute(result.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.submitHandler);
                 }
             }
             else
             {
-                Debug.LogWarning("[SimHand] Raycast result returned null gameObject.");
+                Debug.Log("[SimHand] Raycast hit nothing.");
             }
-        }
-        else
-        {
-            Debug.LogWarning("[SimHand] Raycast did not hit any UI.");
         }
 
         wasTriggerPressed = isTriggerPressed;

@@ -5,15 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity
     guid: 55118a26e47f9744c82c330d014915d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity
     guid: 1e88e9eb07fae244badc9ca7c7f1ff7d
+  - enabled: 0
+    path: Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity
+    guid: dbfc005fdd30bb54dbd5b71328a773f8
+  - enabled: 1
+    path: Assets/Samples/XR Interaction Toolkit/Scenes/ElbowRotationScene.unity
+    guid: cb57c2e6276124644bd9e8bf0b6def7c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4fa6f36379272844dba7956007535964, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

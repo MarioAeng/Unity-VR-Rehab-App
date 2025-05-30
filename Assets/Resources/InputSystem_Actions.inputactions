@@ -962,9 +962,9 @@
                 },
                 {
                     "name": "TriggerAction",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "e5297459-bc4e-493d-82d8-c8a53e7dd04c",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1040,6 +1040,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "BackAction",
+                    "type": "Button",
+                    "id": "7d02e9bc-a0eb-475f-91b8-36b2ab206104",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1150,6 +1159,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "TriggerAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "747a544e-11d1-4a21-9a32-7a902fb8f2ad",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
