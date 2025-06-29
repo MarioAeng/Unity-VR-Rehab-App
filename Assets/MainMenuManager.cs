@@ -7,6 +7,7 @@ public class MainMenuManager : MonoBehaviour
     public string armRaiseSceneName = "ArmRaiseScene";
     public string armRotationSceneName = "ArmRotationScene";
     public string targetPracticeSceneName = "TargetPracticeScene";
+    public string elbowRotationSceneName = "ElbowRotationScene";
 
 
     public void LoadArmRaise()
@@ -26,6 +27,13 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("[MainMenuManager] Loading Target Practice Scene...");
         SceneManager.LoadScene(targetPracticeSceneName);
     }
+    
+    public void LoadElbowRotation()
+    {
+        Debug.Log("[MainMenuManager] Loading Target Practice Scene...");
+        SceneManager.LoadScene(elbowRotationSceneName);
+    }
+    
 
     public void QuitApp()
     {

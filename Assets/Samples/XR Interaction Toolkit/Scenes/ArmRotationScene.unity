@@ -237,13 +237,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 171548974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7925c4ded047a33458516f946dba98be, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ea047ca3a0c6d541a702e7548ec077d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputAssetName: InputSystem_Actions
   trainerPrompt: {fileID: 1728812018}
   repCounterText: {fileID: 184621523}
-  rotationThreshold: 15
+  rotationThreshold: 45
   requiredHoldTime: 1.5
   targetEuler: {x: 0, y: 0, z: 90}
   gripActionName: GripAction
@@ -1579,18 +1579,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Raise your right arm to match the target position.
+  m_text: 'Rotate your right arm  to match the target position.
 
 
-    Hold your arm
-    steady to complete a rep.
+    The motion
+    should be like turning a doorknob.
 
 
-    Text prompts will guide you (e.g., raise, lower,
-    adjust).
+    Hold your arm steady to complete a rep.
 
 
-    Press the primary button (A) to reset reps.'
+    Text
+    prompts will guide you (e.g., raise, lower, adjust).
+
+
+    Press the primary
+    button (A) to reset reps.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

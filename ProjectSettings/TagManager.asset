@@ -6,6 +6,11 @@ TagManager:
   tags:
   - SimulatedHand
   - TargetCube
+  - Cup
+  - EndTable
+  - DropZone
+  - Ground
+  - DropPlatform
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Target
-  - 
+  - Cup
   - 
   - 
   - 

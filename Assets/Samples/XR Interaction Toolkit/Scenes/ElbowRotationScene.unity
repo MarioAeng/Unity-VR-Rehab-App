@@ -240,12 +240,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7925c4ded047a33458516f946dba98be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransform: {fileID: 171548978}
   trainerPrompt: {fileID: 1728812018}
   repCounterText: {fileID: 184621523}
-  leftThreshold: -0.2
-  rightThreshold: 0.2
-  holdTime: 0.5
+  targetLeftX: -0.25
+  targetRightX: 0.25
+  positionThreshold: 0.2
+  requiredHoldTime: 1.5
+  inputAssetName: InputSystem_Actions
+  positionActionName: RightHandPosition
+  rotationActionName: RightHandRotation
+  resetActionName: ResetAction
 --- !u!1 &184621521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,15 +1578,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Raise your right arm to match the target position.
+  m_text: 'Rotate your elbow left to right to match the target position.
 
 
-    Hold your arm
-    steady to complete a rep.
+    Hold
+    your arm steady to complete a rep.
 
 
-    Text prompts will guide you (e.g., raise, lower,
-    adjust).
+    Text prompts will guide you (e.g., raise,
+    lower, adjust).
 
 
     Press the primary button (A) to reset reps.'
