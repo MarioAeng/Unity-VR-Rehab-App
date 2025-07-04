@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 4721438520330527494}
   - component: {fileID: 8217073640440302456}
   - component: {fileID: -1672461625135788496}
+  - component: {fileID: -5834274724395474857}
   m_Layer: 0
   m_Name: DropTable
   m_TagString: DropPlatform
@@ -238,8 +239,8 @@ Transform:
   m_GameObject: {fileID: 8932169666560805397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.1, z: 1.5}
-  m_LocalScale: {x: 1.5, y: 0.1, z: 1}
+  m_LocalPosition: {x: 1.5, y: 0.2, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 0.1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2719547061601088393}
@@ -261,7 +262,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -336,3 +337,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &-5834274724395474857
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932169666560805397}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

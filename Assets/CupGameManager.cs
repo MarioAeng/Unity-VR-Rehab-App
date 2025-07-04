@@ -1,112 +1,167 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class CupGameManager : MonoBehaviour
 {
-    [Header("Prefabs & Spawn")]
-    public GameObject cupPrefab;
-    public GameObject dropTablePrefab;
-    public Transform spawnStartPoint;
+    [Header("Prefabs & Setup")]
+    public GameObject Cup;
+    public GameObject DropTable;
+    public Transform SpawnStartPoint;
+
+    public Material dropTableVisibleMat;
+    public Material cupVisibleMat;
+    public Material defaultPlatformMat;
 
     [Header("UI")]
-    public TMP_Text repCounterText;
-    public TMP_Text levelText;
+    public TextMeshProUGUI TrainerPrompt;
+    public TextMeshProUGUI RepCounterText;
 
-    [Header("Gameplay Settings")]
-    public int repsPerLevel = 10;
-    public float dropStayTime = 0f; // set > 0 for delayed success
-
-    private int currentReps = 0;
+    private int totalReps = 10;
+    private int repsCompleted = 0;
     private int currentLevel = 1;
-    private List<GameObject> currentPlatforms = new List<GameObject>();
 
-    private void Start()
+    private List<GameObject> activeTables = new();
+    private GameObject activeCup;
+    private GameObject targetTable;
+    private GameObject startTable;
+
+    private float platformSpacing = 1.4f;
+    private float zClampMin = -1.5f, zClampMax = 1.5f;
+
+    void Start()
     {
-        Debug.Log("[CupGameManager] Starting game");
-        UpdateUI();
-        SpawnLevelPlatforms();
+        InitializeLevel();
+    }
+
+    void InitializeLevel()
+    {
+        Debug.Log($"[Manager] Level {currentLevel} Init");
+        ClearPreviousObjects();
+        repsCompleted = 0;
+        UpdateRepCounter();
+
+        TrainerPrompt.text = $"Deliver {totalReps} cups!";
+        SpawnTables(currentLevel);
         SpawnCup();
     }
 
-    private void UpdateUI()
+    void ClearPreviousObjects()
     {
-        if (repCounterText) repCounterText.text = $"Reps: {currentReps}/{repsPerLevel}";
-        if (levelText) levelText.text = $"Level {currentLevel}";
+        foreach (var t in activeTables)
+            if (t != null) Destroy(t);
+        activeTables.Clear();
+
+        if (activeCup != null) Destroy(activeCup);
     }
 
-    public void RegisterCupDrop()
+    void SpawnTables(int level)
     {
-        currentReps++;
-        Debug.Log($"[CupGameManager] Cup dropped successfully. Total reps: {currentReps}");
+        int count = Mathf.Clamp(2 + level, 2, 6);
+        float radius = 1.5f + level * 0.4f;
 
-        UpdateUI();
-
-        if (currentReps >= repsPerLevel)
+        int tries = 0;
+        while (activeTables.Count < count && tries < 100)
         {
-            currentLevel++;
-            currentReps = 0;
-            Debug.Log($"[CupGameManager] Advancing to Level {currentLevel}");
-            ClearLevel();
-            SpawnLevelPlatforms();
+            Vector3 offset = new Vector3(Random.Range(-radius, radius), 0f, Random.Range(zClampMin, zClampMax));
+            Vector3 pos = SpawnStartPoint.position + offset;
+
+            bool tooClose = false;
+            foreach (var table in activeTables)
+            {
+                if (Vector3.Distance(pos, table.transform.position) < platformSpacing)
+                {
+                    tooClose = true;
+                    break;
+                }
+            }
+
+            if (!tooClose)
+            {
+                GameObject table = Instantiate(DropTable, pos, Quaternion.identity);
+                activeTables.Add(table);
+            }
+
+            tries++;
         }
 
-        SpawnCup();
+        targetTable = activeTables[Random.Range(0, activeTables.Count)];
+
+        do {
+            startTable = activeTables[Random.Range(0, activeTables.Count)];
+        } while (startTable == targetTable);
+
+        foreach (var table in activeTables)
+        {
+            var rend = table.GetComponent<Renderer>();
+            if (rend)
+            {
+                rend.material = (table == targetTable) ? dropTableVisibleMat : defaultPlatformMat;
+            }
+        }
+
+        Debug.Log($"[Tables] Start: {startTable.name}, Target: {targetTable.name}");
     }
 
-    private void SpawnCup()
+    void SpawnCup()
     {
-        if (cupPrefab == null || spawnStartPoint == null)
-        {
-            Debug.LogError("[CupGameManager] Cup prefab or spawn point is not assigned!");
-            return;
-        }
+        Vector3 pos = startTable.transform.position + Vector3.up * 0.5f;
+        activeCup = Instantiate(Cup, pos, Quaternion.identity);
+        activeCup.SetActive(true);
 
-        Vector3 spawnPos = spawnStartPoint.position;
-        GameObject cup = Instantiate(cupPrefab, spawnPos, Quaternion.identity);
-        Debug.Log($"[CupGameManager] Spawned Cup at {spawnPos}");
-
-        CupDropDetector detector = cup.GetComponent<CupDropDetector>();
-        if (detector != null)
+        // Find CupDropDetector on the child (TriggerZone)
+        CupDropDetector detector = activeCup.GetComponentInChildren<CupDropDetector>();
+        if (detector)
         {
             detector.manager = this;
-            detector.requiredStayTime = dropStayTime;
-            Debug.Log("[CupGameManager] Assigned manager to CupDropDetector");
+            detector.targetTable = targetTable;
+            detector.requiredStayTime = currentLevel >= 2 ? 0.6f : 0f;
+
+            Debug.Log("[SpawnCup] Detector set on TriggerZone child.");
         }
         else
         {
-            Debug.LogWarning("[CupGameManager] Spawned Cup is missing CupDropDetector");
+            Debug.LogWarning("[SpawnCup] CupDropDetector not found in child.");
+        }
+
+        var rend = activeCup.GetComponent<Renderer>();
+        if (rend) rend.material = cupVisibleMat;
+
+        Debug.Log("[SpawnCup] Cup spawned and visible.");
+    }
+
+    public void RegisterSuccessfulDrop()
+    {
+        Debug.Log($"[Progress] Rep {repsCompleted + 1} / {totalReps}");
+
+        if (activeCup != null)
+        {
+            Destroy(activeCup);
+            activeCup = null;
+        }
+
+        repsCompleted++;
+        UpdateRepCounter();
+
+        if (repsCompleted < totalReps)
+        {
+            if (currentLevel > 1)
+            {
+                ClearPreviousObjects();
+                SpawnTables(currentLevel);
+            }
+            SpawnCup();
+        }
+        else
+        {
+            TrainerPrompt.text = $"Level {currentLevel} complete!";
+            currentLevel++;
+            InitializeLevel();
         }
     }
 
-    private void SpawnLevelPlatforms()
+    void UpdateRepCounter()
     {
-        if (dropTablePrefab == null)
-        {
-            Debug.LogError("[CupGameManager] Drop table prefab is missing!");
-            return;
-        }
-
-        int platformCount = Mathf.Min(currentLevel + 1, 5);
-        float spacing = 0.75f + currentLevel * 0.25f;
-
-        for (int i = 0; i < platformCount; i++)
-        {
-            Vector3 pos = new Vector3(i * spacing, 0.1f, 1.5f);
-            GameObject platform = Instantiate(dropTablePrefab, pos, Quaternion.identity);
-            currentPlatforms.Add(platform);
-
-            Debug.Log($"[CupGameManager] Spawned drop platform at {pos}");
-        }
-    }
-
-    private void ClearLevel()
-    {
-        foreach (GameObject platform in currentPlatforms)
-        {
-            if (platform != null) Destroy(platform);
-        }
-
-        currentPlatforms.Clear();
+        RepCounterText.text = $"Delivered: {repsCompleted}/{totalReps}";
     }
 }

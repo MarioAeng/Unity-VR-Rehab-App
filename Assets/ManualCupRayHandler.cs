@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class ManualCupRayHandler : MonoBehaviour
 {
     [Header("References")]
-    public Transform handTransform;
-    public Transform rayObject;
+    public Transform handTransform;  // MainSelectorHand
+    public Transform rayObject;      // Same as above
     public Transform holdPoint;
     public InputActionProperty triggerAction;
     public float rayLength = 15f;
@@ -15,36 +15,39 @@ public class ManualCupRayHandler : MonoBehaviour
     public Vector3 rayOffset = new Vector3(0f, -0.15f, 0.2f);
 
     private GameObject heldCup = null;
-    private Vector3 originalScale;
     private bool wasTriggerPressed = false;
+
+    void OnEnable()
+    {
+        if (triggerAction.action != null)
+        {
+            triggerAction.action.Enable();
+            Debug.Log("[RayHandler] TriggerAction enabled in OnEnable.");
+        }
+        else
+        {
+            Debug.LogError("[RayHandler] TriggerAction is null!");
+        }
+    }
 
     void Update()
     {
         if (handTransform == null || rayObject == null || holdPoint == null || triggerAction.action == null)
         {
-            Debug.LogWarning("[ManualCupRayHandler] ❌ Missing references.");
+            Debug.LogWarning("[ManualCupRayHandler] ❌ One or more references are missing.");
             return;
         }
 
         if (handTransform.position.y < 0.1f)
         {
-            Debug.Log("[RayDebug] ✋ Hand not tracked yet.");
+            Debug.Log("[RayDebug] ✋ Hand is too low or not tracked.");
             return;
         }
 
-        // Move rayObject to offset from hand
+        // Update ray position and rotation
         rayObject.position = handTransform.TransformPoint(rayOffset);
         rayObject.rotation = handTransform.rotation;
 
-        // Maintain held cup position manually
-        if (heldCup != null)
-        {
-            heldCup.transform.position = holdPoint.position;
-            heldCup.transform.rotation = holdPoint.rotation;
-            Debug.Log($"[HeldCup] Updating position to HoldPoint: {holdPoint.position}");
-        }
-
-        // Trigger input
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool isPressed = triggerValue > 0.5f;
 
@@ -66,21 +69,46 @@ public class ManualCupRayHandler : MonoBehaviour
         Ray ray = new Ray(rayObject.position, rayObject.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, rayLength, cupLayer))
         {
+            Debug.Log($"[RayHandler] Ray hit: {hit.collider.name}");
+
             if (hit.collider.CompareTag("Cup"))
             {
                 heldCup = hit.collider.gameObject;
-                originalScale = heldCup.transform.lossyScale;
 
-                heldCup.transform.SetParent(null); // Detach from any old parent
-                heldCup.transform.position = holdPoint.position;
-                heldCup.transform.rotation = holdPoint.rotation;
-                heldCup.transform.localScale = Vector3.one;
+                // Save world scale
+                Vector3 worldScale = heldCup.transform.lossyScale;
+
+                // Clear parent before reattaching to avoid distortion
+                heldCup.transform.SetParent(null);
+                heldCup.transform.SetPositionAndRotation(holdPoint.position + holdPoint.forward * 0.4f, holdPoint.rotation);
+                heldCup.transform.SetParent(holdPoint, worldPositionStays: true);
+
+                // Fix scale distortion by converting world to local
+                Vector3 parentScale = holdPoint.lossyScale;
+                heldCup.transform.localScale = new Vector3(
+                    worldScale.x / parentScale.x,
+                    worldScale.y / parentScale.y,
+                    worldScale.z / parentScale.z
+                );
 
                 var rb = heldCup.GetComponent<Rigidbody>();
-                if (rb) rb.isKinematic = true;
+                if (rb)
+                {
+                    rb.isKinematic = true;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                }
 
-                Debug.Log($"[Pickup] ✅ Picked up {heldCup.name} at {heldCup.transform.position}");
+                Debug.Log($"[Pickup] ✅ Picked up {heldCup.name} | World Scale Preserved: {worldScale}");
             }
+            else
+            {
+                Debug.Log($"[RayHandler] Hit non-cup object: {hit.collider.tag}");
+            }
+        }
+        else
+        {
+            Debug.Log("[RayHandler] ❌ Raycast did not hit anything.");
         }
     }
 
@@ -89,7 +117,6 @@ public class ManualCupRayHandler : MonoBehaviour
         if (heldCup == null) return;
 
         heldCup.transform.SetParent(null);
-        heldCup.transform.localScale = originalScale;
 
         var rb = heldCup.GetComponent<Rigidbody>();
         if (rb)

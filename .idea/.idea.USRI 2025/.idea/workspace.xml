@@ -6,19 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ButtonHighlighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainMenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NewBehaviourScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NewBehaviourScript.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ElbowRotationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ElbowRotationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandRotationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandRotationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CupDropDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupDropDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CupGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DropTable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DropTable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DropTableVisibleMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DropTableVisibleMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/2.6.4/Starter Assets/Prefabs/XR Origin (XR Rig).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/2.6.4/Starter Assets/Prefabs/XR Origin (XR Rig).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -706,6 +703,72 @@
       <workItem from="1751060633397" duration="172000" />
       <workItem from="1751061006788" duration="45000" />
       <workItem from="1751061522006" duration="89000" />
+      <workItem from="1751282543279" duration="278000" />
+      <workItem from="1751284116133" duration="59000" />
+      <workItem from="1751285917364" duration="48000" />
+      <workItem from="1751285995532" duration="94000" />
+      <workItem from="1751286448239" duration="318000" />
+      <workItem from="1751287215498" duration="160000" />
+      <workItem from="1751288375831" duration="393000" />
+      <workItem from="1751289749378" duration="35000" />
+      <workItem from="1751290531762" duration="49000" />
+      <workItem from="1751292414628" duration="345000" />
+      <workItem from="1751295493977" duration="615000" />
+      <workItem from="1751297079068" duration="78000" />
+      <workItem from="1751297893123" duration="195000" />
+      <workItem from="1751298545190" duration="69000" />
+      <workItem from="1751302117578" duration="55000" />
+      <workItem from="1751302727523" duration="102000" />
+      <workItem from="1751303284059" duration="67000" />
+      <workItem from="1751303706984" duration="41000" />
+      <workItem from="1751303889553" duration="59000" />
+      <workItem from="1751304467137" duration="178000" />
+      <workItem from="1751305225765" duration="283000" />
+      <workItem from="1751306605365" duration="195000" />
+      <workItem from="1751463958684" duration="177000" />
+      <workItem from="1751467804077" duration="92000" />
+      <workItem from="1751467925577" duration="70000" />
+      <workItem from="1751468114914" duration="399000" />
+      <workItem from="1751469908564" duration="53000" />
+      <workItem from="1751473855045" duration="257000" />
+      <workItem from="1751475644345" duration="391000" />
+      <workItem from="1751476834731" duration="184000" />
+      <workItem from="1751478099166" duration="1921000" />
+      <workItem from="1751483062396" duration="206000" />
+      <workItem from="1751483593274" duration="161000" />
+      <workItem from="1751484565829" duration="410000" />
+      <workItem from="1751485674055" duration="60000" />
+      <workItem from="1751486450819" duration="51000" />
+      <workItem from="1751486759913" duration="272000" />
+      <workItem from="1751487739092" duration="61000" />
+      <workItem from="1751546688881" duration="927000" />
+      <workItem from="1751548365408" duration="162000" />
+      <workItem from="1751548620408" duration="525000" />
+      <workItem from="1751552052841" duration="143000" />
+      <workItem from="1751553645902" duration="372000" />
+      <workItem from="1751554531918" duration="382000" />
+      <workItem from="1751561886497" duration="177000" />
+      <workItem from="1751563153986" duration="118000" />
+      <workItem from="1751564650200" duration="211000" />
+      <workItem from="1751567617527" duration="76000" />
+      <workItem from="1751571062707" duration="53000" />
+      <workItem from="1751571545347" duration="193000" />
+      <workItem from="1751572438899" duration="67000" />
+      <workItem from="1751632257465" duration="34000" />
+      <workItem from="1751637225482" duration="256000" />
+      <workItem from="1751638156055" duration="120000" />
+      <workItem from="1751640311516" duration="69000" />
+      <workItem from="1751641256558" duration="99000" />
+      <workItem from="1751643354044" duration="140000" />
+      <workItem from="1751650841838" duration="39000" />
+      <workItem from="1751652714719" duration="201000" />
+      <workItem from="1751656273524" duration="272000" />
+      <workItem from="1751656947634" duration="71000" />
+      <workItem from="1751658007838" duration="62000" />
+      <workItem from="1751658760054" duration="157000" />
+      <workItem from="1751659427598" duration="70000" />
+      <workItem from="1751660001918" duration="63000" />
+      <workItem from="1751660853042" duration="95000" />
     </task>
     <servers />
   </component>

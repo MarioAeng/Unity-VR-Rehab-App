@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DropTableVisibleMat
+  m_Name: startPlatformMaterial
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -100,7 +100,6 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -111,16 +110,15 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9786185, g: 1, b: 0, a: 1}
-    - _Color: {r: 0.97861844, g: 1, b: 0, a: 1}
+    - _BaseColor: {r: 0.3679245, g: 0.33842114, b: 0.33842114, a: 1}
+    - _Color: {r: 0.36792448, g: 0.3384211, b: 0.3384211, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4262085022316006523
+--- !u!114 &6243424814633451074
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
