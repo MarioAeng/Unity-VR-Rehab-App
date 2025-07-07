@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
     public string armRotationSceneName = "ArmRotationScene";
     public string targetPracticeSceneName = "TargetPracticeScene";
     public string elbowRotationSceneName = "ElbowRotationScene";
-
+    public string cupTransferSceneName = "CupTransferScene"; // NEW
 
     public void LoadArmRaise()
     {
@@ -21,19 +21,24 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("[MainMenuManager] Loading Arm Rotation Scene...");
         SceneManager.LoadScene(armRotationSceneName);
     }
-    
+
     public void LoadTargetPractice()
     {
         Debug.Log("[MainMenuManager] Loading Target Practice Scene...");
         SceneManager.LoadScene(targetPracticeSceneName);
     }
-    
+
     public void LoadElbowRotation()
     {
-        Debug.Log("[MainMenuManager] Loading Target Practice Scene...");
+        Debug.Log("[MainMenuManager] Loading Elbow Rotation Scene...");
         SceneManager.LoadScene(elbowRotationSceneName);
     }
-    
+
+    public void LoadCupTransfer()
+    {
+        Debug.Log("[MainMenuManager] Loading Cup Transfer Scene...");
+        SceneManager.LoadScene(cupTransferSceneName);
+    }
 
     public void QuitApp()
     {

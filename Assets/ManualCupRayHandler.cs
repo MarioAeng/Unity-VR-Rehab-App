@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class ManualCupRayHandler : MonoBehaviour
 {
     [Header("References")]
-    public Transform handTransform;  // MainSelectorHand
-    public Transform rayObject;      // Same as above
+    public Transform handTransform;    // MainSelectorHand
+    public Transform rayObject;        // MainSelectorHand
     public Transform holdPoint;
     public InputActionProperty triggerAction;
     public float rayLength = 15f;
@@ -15,20 +15,9 @@ public class ManualCupRayHandler : MonoBehaviour
     public Vector3 rayOffset = new Vector3(0f, -0.15f, 0.2f);
 
     private GameObject heldCup = null;
+    private Rigidbody heldCupRb;
+    private Vector3 originalScale;
     private bool wasTriggerPressed = false;
-
-    void OnEnable()
-    {
-        if (triggerAction.action != null)
-        {
-            triggerAction.action.Enable();
-            Debug.Log("[RayHandler] TriggerAction enabled in OnEnable.");
-        }
-        else
-        {
-            Debug.LogError("[RayHandler] TriggerAction is null!");
-        }
-    }
 
     void Update()
     {
@@ -44,7 +33,6 @@ public class ManualCupRayHandler : MonoBehaviour
             return;
         }
 
-        // Update ray position and rotation
         rayObject.position = handTransform.TransformPoint(rayOffset);
         rayObject.rotation = handTransform.rotation;
 
@@ -61,6 +49,15 @@ public class ManualCupRayHandler : MonoBehaviour
 
         wasTriggerPressed = isPressed;
 
+        if (heldCup != null)
+        {
+            Vector3 tetherOffset = holdPoint.forward * 0.05f + holdPoint.up * -0.04f;
+            heldCup.transform.position = holdPoint.position + tetherOffset;
+            heldCup.transform.rotation = holdPoint.rotation;
+
+            Debug.Log($"[Tether] CupPos: {heldCup.transform.position}, HoldPoint: {holdPoint.position}");
+        }
+
         Debug.DrawRay(rayObject.position, rayObject.forward * rayLength, Color.green);
     }
 
@@ -74,32 +71,12 @@ public class ManualCupRayHandler : MonoBehaviour
             if (hit.collider.CompareTag("Cup"))
             {
                 heldCup = hit.collider.gameObject;
+                heldCupRb = heldCup.GetComponent<Rigidbody>();
+                originalScale = heldCup.transform.lossyScale;
 
-                // Save world scale
-                Vector3 worldScale = heldCup.transform.lossyScale;
+                if (heldCupRb) heldCupRb.isKinematic = true;
 
-                // Clear parent before reattaching to avoid distortion
-                heldCup.transform.SetParent(null);
-                heldCup.transform.SetPositionAndRotation(holdPoint.position + holdPoint.forward * 0.4f, holdPoint.rotation);
-                heldCup.transform.SetParent(holdPoint, worldPositionStays: true);
-
-                // Fix scale distortion by converting world to local
-                Vector3 parentScale = holdPoint.lossyScale;
-                heldCup.transform.localScale = new Vector3(
-                    worldScale.x / parentScale.x,
-                    worldScale.y / parentScale.y,
-                    worldScale.z / parentScale.z
-                );
-
-                var rb = heldCup.GetComponent<Rigidbody>();
-                if (rb)
-                {
-                    rb.isKinematic = true;
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                }
-
-                Debug.Log($"[Pickup] ✅ Picked up {heldCup.name} | World Scale Preserved: {worldScale}");
+                Debug.Log($"[Pickup] ✅ Picked up {heldCup.name} (Scale: {originalScale})");
             }
             else
             {
@@ -116,16 +93,15 @@ public class ManualCupRayHandler : MonoBehaviour
     {
         if (heldCup == null) return;
 
-        heldCup.transform.SetParent(null);
-
-        var rb = heldCup.GetComponent<Rigidbody>();
-        if (rb)
+        if (heldCupRb)
         {
-            rb.isKinematic = false;
-            rb.velocity = Vector3.zero;
+            heldCupRb.isKinematic = false;
+            heldCupRb.velocity = Vector3.zero;
         }
 
         Debug.Log($"[Drop] 🟨 Dropped {heldCup.name}");
+
         heldCup = null;
+        heldCupRb = null;
     }
 }

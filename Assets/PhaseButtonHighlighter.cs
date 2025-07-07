@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ManualButtonHighlighter : MonoBehaviour
+public class PhaseButtonHighlighter : MonoBehaviour
 {
     [System.Serializable]
     public class ButtonBounds
@@ -21,7 +21,7 @@ public class ManualButtonHighlighter : MonoBehaviour
     public Color highlightColor = Color.green;
 
     [Header("Ray Reach Settings")]
-    public float yReachMultiplier = 2f; // ✅ Default is 2x downward reach
+    public float yReachMultiplier = 2f;
 
     private bool sceneLoading = false;
     private ButtonBounds[] buttons;
@@ -31,34 +31,22 @@ public class ManualButtonHighlighter : MonoBehaviour
         buttons = new ButtonBounds[]
         {
             new ButtonBounds {
-                sceneName = "ArmRaiseScene",
+                sceneName = "MainMenuScene", // Phase 1
                 centerLocalXY = new Vector2(0, 120f),
                 size = new Vector2(600f, 220f),
-                image = GameObject.Find("ArmRaiseButton")?.GetComponent<Image>()
+                image = GameObject.Find("PhaseOneButton")?.GetComponent<Image>()
             },
             new ButtonBounds {
-                sceneName = "ArmRotationScene",
+                sceneName = "Phase2MenuScene", // Phase 2
                 centerLocalXY = new Vector2(0, 80f),
                 size = new Vector2(600f, 200f),
-                image = GameObject.Find("ArmRotationButton")?.GetComponent<Image>()
+                image = GameObject.Find("PhaseTwoButton")?.GetComponent<Image>()
             },
             new ButtonBounds {
-                sceneName = "TargetPracticeScene",
+                sceneName = "Phase3MenuScene", // Phase 3
                 centerLocalXY = new Vector2(0, 40f),
                 size = new Vector2(600f, 200f),
-                image = GameObject.Find("TargetPracticeButton")?.GetComponent<Image>()
-            },
-            new ButtonBounds {
-                sceneName = "ElbowRotationScene",
-                centerLocalXY = new Vector2(0, -20f),
-                size = new Vector2(600f, 220f),
-                image = GameObject.Find("ElbowRotationButton")?.GetComponent<Image>()
-            },
-            new ButtonBounds {
-                sceneName = "CupTransferScene",
-                centerLocalXY = new Vector2(0, -60f),
-                size = new Vector2(600f, 220f),
-                image = GameObject.Find("CupTransferButton")?.GetComponent<Image>()
+                image = GameObject.Find("PhaseThreeButton")?.GetComponent<Image>()
             }
         };
     }
@@ -67,19 +55,17 @@ public class ManualButtonHighlighter : MonoBehaviour
     {
         if (sceneLoading || triggerAction.action == null || handTransform == null || canvasTransform == null)
         {
-            Debug.LogWarning("[ManualButtonHighlighter] 🚫 Missing references or scene is loading.");
+            Debug.LogWarning("[PhaseButtonHighlighter] 🚫 Missing references or scene is loading.");
             return;
         }
 
         Vector3 handLocal = canvasTransform.InverseTransformPoint(handTransform.position);
-
-        // ✅ Multiply Y to simulate reaching further
         handLocal.y *= yReachMultiplier;
 
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool triggerPressed = triggerValue > 0.5f;
 
-        Debug.Log($"[Input] ✋ Adjusted Hand Local: {handLocal}, 🔫 Trigger: {triggerValue:F2} | Pressed: {triggerPressed}");
+        Debug.Log($"[PhaseHighlight] ✋ Adjusted Hand Local: {handLocal}, 🔫 Trigger: {triggerValue:F2}");
 
         ButtonBounds matchedButton = null;
 
@@ -93,15 +79,13 @@ public class ManualButtonHighlighter : MonoBehaviour
             bool inX = dx <= half.x;
             bool inY = dy <= half.y;
 
-            bool isInside = inX && inY;
-            if (isInside && matchedButton == null)
+            if (inX && inY && matchedButton == null)
             {
                 matchedButton = btn;
-                Debug.Log($"[Match] 🎯 Inside {btn.sceneName} | dx={dx:F1}, dy={dy:F1}");
+                Debug.Log($"[PhaseHighlight] 🎯 Hit {btn.sceneName} | dx={dx:F1}, dy={dy:F1}");
             }
         }
 
-        // Highlighting logic – only one gets highlighted
         foreach (var btn in buttons)
         {
             if (btn.image != null)
@@ -110,13 +94,9 @@ public class ManualButtonHighlighter : MonoBehaviour
 
         if (triggerPressed && matchedButton != null)
         {
-            Debug.Log($"[SceneLoad] ✅ Triggered {matchedButton.sceneName} at handLocal={handLocal}");
+            Debug.Log($"[PhaseHighlight] ✅ Loading {matchedButton.sceneName}");
             sceneLoading = true;
             SceneManager.LoadScene(matchedButton.sceneName);
-        }
-        else if (triggerPressed && matchedButton == null)
-        {
-            Debug.Log("[SceneLoad] ❌ Trigger pressed but no button matched.");
         }
     }
 }

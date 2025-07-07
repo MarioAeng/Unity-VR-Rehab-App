@@ -7,15 +7,15 @@
     <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Cup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CupDropDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupDropDetector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CupGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupGameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DropTable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DropTable.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DropTableVisibleMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DropTableVisibleMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainMenuManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/2.6.4/Starter Assets/Prefabs/XR Origin (XR Rig).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/2.6.4/Starter Assets/Prefabs/XR Origin (XR Rig).prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandMenuSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandMenuSelector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +29,13 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/AutoPositionCanvas.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ButtonHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CupDropDebugger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CupDropDetector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CupGameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DebugRayLogger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DebugXRInputs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandReachExtender.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/MainMenuManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuRayInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuRestorer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuReturnFixer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,6 +94,19 @@
       <option name="WORKING_DIRECTORY" value="C:\Users\Mario\USRI 2025" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -769,6 +784,27 @@
       <workItem from="1751659427598" duration="70000" />
       <workItem from="1751660001918" duration="63000" />
       <workItem from="1751660853042" duration="95000" />
+      <workItem from="1751890173801" duration="864000" />
+      <workItem from="1751891786770" duration="81000" />
+      <workItem from="1751892660563" duration="56000" />
+      <workItem from="1751893443750" duration="120000" />
+      <workItem from="1751896762048" duration="166000" />
+      <workItem from="1751898787519" duration="116000" />
+      <workItem from="1751899841925" duration="448000" />
+      <workItem from="1751901067793" duration="198000" />
+      <workItem from="1751901431223" duration="32000" />
+      <workItem from="1751902261482" duration="150000" />
+      <workItem from="1751903649288" duration="27000" />
+      <workItem from="1751904096192" duration="43000" />
+      <workItem from="1751904816630" duration="39000" />
+      <workItem from="1751905518053" duration="97000" />
+      <workItem from="1751906008660" duration="451000" />
+      <workItem from="1751906811509" duration="47000" />
+      <workItem from="1751906910949" duration="39000" />
+      <workItem from="1751908544590" duration="113000" />
+      <workItem from="1751909144398" duration="67000" />
+      <workItem from="1751911305356" duration="303000" />
+      <workItem from="1751913154103" duration="100000" />
     </task>
     <servers />
   </component>
