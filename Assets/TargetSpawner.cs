@@ -12,15 +12,15 @@ public class TargetSpawner : MonoBehaviour
     public TMP_Text timerText;
 
     [Header("Spawn Settings")]
-    public float spawnRadius = 0.6f;
-    public float verticalMin = -0.5f;
-    public float verticalMax = 0.2f;
-    public float horizontalMin = -0.5f;
-    public float horizontalMax = 0.5f;
+    public float verticalMin = -0.1f;
+    public float verticalMax = 0.1f;
+    public float horizontalMin = -0.05f;
+    public float horizontalMax = 0.05f;
     public float forwardOffset = 2f;
 
     [Header("Gameplay Settings")]
     public float baseTargetLifetime = 10f;
+    public float baseMinSpacing = 0.3f;
 
     private int repsThisLevel = 0;
     private int hitsThisLevel = 0;
@@ -29,6 +29,9 @@ public class TargetSpawner : MonoBehaviour
     private float currentTimer = 0f;
     private bool targetActive = false;
     private bool hasShownInstructions = false;
+
+    private Vector3 lastSpawnPosition;
+    private bool hasSpawnedBefore = false;
 
     void Start()
     {
@@ -113,7 +116,7 @@ public class TargetSpawner : MonoBehaviour
         }
         else if (level > 1 && hasShownInstructions)
         {
-            trainerPromptText.text = ""; // clear instructions after level 1
+            trainerPromptText.text = "";
         }
     }
 
@@ -127,27 +130,42 @@ public class TargetSpawner : MonoBehaviour
             return;
         }
 
-        Vector3 offset = new Vector3(
-            Random.Range(horizontalMin, horizontalMax),
-            Random.Range(verticalMin, verticalMax),
-            forwardOffset
-        );
+        float minDistanceFromLastSpawn = baseMinSpacing + 0.05f * (level - 1);
+        float maxSpacing = 0.2f; // since horizontalMin/Max are narrow
+        minDistanceFromLastSpawn = Mathf.Min(minDistanceFromLastSpawn, maxSpacing);
 
-        Vector3 spawnPosition = handOrigin.position + handOrigin.TransformDirection(offset);
+        Vector3 spawnPosition;
+        int tries = 0;
+
+        do
+        {
+            float xOffset = Random.Range(horizontalMin, horizontalMax);
+            float yOffset = Random.Range(verticalMin, verticalMax);
+            Vector3 offset = new Vector3(xOffset, yOffset, forwardOffset);
+            spawnPosition = handOrigin.position + handOrigin.TransformDirection(offset);
+
+            tries++;
+            if (tries > 15) break;
+
+        } while (hasSpawnedBefore && Vector3.Distance(spawnPosition, lastSpawnPosition) < minDistanceFromLastSpawn);
 
         currentTarget = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
         currentTarget.tag = "TargetCube";
 
         float baseScale = 0.2f;
-        float sizeMultiplier = Mathf.Max(0.5f, 1f - 0.1f * (level - 1)); // Shrinks with level
+        float sizeMultiplier = Mathf.Max(0.5f, 1f - 0.1f * (level - 1));
         currentTarget.transform.localScale = Vector3.one * baseScale * sizeMultiplier;
+
+        lastSpawnPosition = spawnPosition;
+        hasSpawnedBefore = true;
 
         if (level >= 3)
         {
-            currentTimer = Mathf.Max(3f, baseTargetLifetime - level); // Decreasing timer
+            float difficultyAdjustedLifetime = Mathf.Max(1.5f, baseTargetLifetime - (level * 0.5f));
+            currentTimer = difficultyAdjustedLifetime;
             targetActive = true;
         }
 
-        Debug.Log($"[TargetSpawner] Spawned target at {spawnPosition} | Scale: {currentTarget.transform.localScale}");
+        Debug.Log($"[TargetSpawner] Spawned target at {spawnPosition} | Level: {level}");
     }
 }

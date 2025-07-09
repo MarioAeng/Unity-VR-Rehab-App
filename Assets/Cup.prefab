@@ -69,6 +69,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   targetTable: {fileID: 0}
   requiredStayTime: 0.6
+  safeDropHeight: 1.2
 --- !u!1 &2676736340476772538
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +85,7 @@ GameObject:
   - component: {fileID: -8546422202875665645}
   - component: {fileID: 7779988003013141041}
   - component: {fileID: -174395755848299249}
+  - component: {fileID: 211132529640940879}
   m_Layer: 7
   m_Name: Cup
   m_TagString: Cup
@@ -220,6 +222,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   targetTable: {fileID: 0}
   requiredStayTime: 0
+  safeDropHeight: 1.2
 --- !u!114 &-174395755848299249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,5 +233,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63ca26f8af579f949a2ef4e1447fd584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &211132529640940879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676736340476772538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea082537f0604054d856bb3fb44071dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

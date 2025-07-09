@@ -466,6 +466,7 @@ MonoBehaviour:
   defaultPlatformMat: {fileID: 2100000, guid: fa8d6cca288ed614ab928bc3507dfec9, type: 2}
   TrainerPrompt: {fileID: 1797877130}
   RepCounterText: {fileID: 412831625}
+  TimeText: {fileID: 2005764177}
 --- !u!4 &379406995
 Transform:
   m_ObjectHideFlags: 0
@@ -3462,6 +3463,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   rayOffset: {x: 0, y: -0.15, z: 0.2}
+  cupVisibleMaterial: {fileID: 2100000, guid: aac623213cafceb4db3392471af13b7e, type: 2}
+  cupHighlightMaterial: {fileID: 2100000, guid: 727f87098255ad04987a60f5f08390bc, type: 2}
+  cupTooHighMaterial: {fileID: 2100000, guid: 55fa12dc7870f1e46b6a7f8617949a86, type: 2}
+  safeDropHeight: 0.4
 --- !u!1 &2005764176
 GameObject:
   m_ObjectHideFlags: 0

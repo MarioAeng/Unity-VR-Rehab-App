@@ -13,9 +13,9 @@ public class SimulatedHandController : MonoBehaviour
     public float positionThreshold = 0.2f;
     public float requiredHoldTime = 1.5f;
 
-    [Header("Target Position (Arbitrary)")]
+    [Header("Target Position (Calibration-based)")]
     public float targetX = 0f;
-    public float targetY = 1.3f;
+    public float targetY = 1.3f; // Gets set during calibration
 
     [Header("Input Action Names")]
     public string gripActionName = "GripAction";
@@ -36,7 +36,9 @@ public class SimulatedHandController : MonoBehaviour
     private bool isInCorrectPose = false;
     private bool waitingForReset = false;
 
-    private Vector3 offset = new Vector3(0f, -0.4f, 0.3f); // Lower & push forward
+    private Vector3 offset = new Vector3(0f, -0.4f, 0.3f);
+
+    private bool isCalibrated = false;
 
     private void OnEnable()
     {
@@ -44,7 +46,7 @@ public class SimulatedHandController : MonoBehaviour
 
         if (inputActionAsset == null)
         {
-            Debug.LogError("[SimHand] InputActionAsset not found.");
+            Debug.LogError("[SimHand] ❌ InputActionAsset not found.");
             return;
         }
 
@@ -70,7 +72,7 @@ public class SimulatedHandController : MonoBehaviour
 
     private void Update()
     {
-        // Update position and rotation
+        // Track and move simulated hand
         if (positionAction != null && rotationAction != null)
         {
             Vector3 rawPosition = positionAction.ReadValue<Vector3>();
@@ -80,16 +82,25 @@ public class SimulatedHandController : MonoBehaviour
             transform.SetPositionAndRotation(adjustedPosition, rotation);
         }
 
-        // Grip display for debug
-        if (gripAction != null)
+        if (!isCalibrated)
         {
-            float grip = gripAction.ReadValue<float>();
-            Debug.Log($"[SimHand] Grip: {grip:F2}");
+            trainerPrompt.text = "Raise your hand to the desired height and press trigger to calibrate.";
+
+            if (triggerAction != null && triggerAction.triggered)
+            {
+                Vector3 handPos = transform.position;
+                targetY = handPos.y;
+                isCalibrated = true;
+                trainerPrompt.text = "✅ Calibration complete. Start raising your hand.";
+                Debug.Log($"[SimHand] 🎯 Calibrated height set to Y = {targetY:F2}");
+            }
+
+            return;
         }
 
-        Vector3 handPos = transform.position;
-        float deltaX = handPos.x - targetX;
-        float deltaY = handPos.y - targetY;
+        Vector3 currentPos = transform.position;
+        float deltaX = currentPos.x - targetX;
+        float deltaY = currentPos.y - targetY;
         float distance = Mathf.Sqrt(deltaX * deltaX + deltaY * deltaY);
 
         if (waitingForReset)
@@ -117,7 +128,7 @@ public class SimulatedHandController : MonoBehaviour
                 waitingForReset = true;
                 repCount++;
                 repCounterText.text = $"Reps: {repCount}";
-                Debug.Log($"[SimHand] Rep completed: {repCount}");
+                Debug.Log($"[SimHand] ✅ Rep #{repCount} complete.");
             }
         }
         else
@@ -139,9 +150,10 @@ public class SimulatedHandController : MonoBehaviour
             holdTimer = 0f;
             isInCorrectPose = false;
             waitingForReset = false;
+            isCalibrated = false;
             repCounterText.text = $"Reps: {repCount}";
-            trainerPrompt.text = "Reset complete.";
-            Debug.Log("[SimHand] Reps reset.");
+            trainerPrompt.text = "🔁 Reset complete. Calibrate again.";
+            Debug.Log("[SimHand] 🔁 Reset pressed.");
         }
     }
 }

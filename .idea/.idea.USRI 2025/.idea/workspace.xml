@@ -7,14 +7,14 @@
     <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Cup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DropTable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DropTable.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainMenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CupDropDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupDropDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CupGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupGameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandMenuSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandMenuSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TargetSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TargetSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" afterDir="false" />
     </list>
@@ -41,8 +41,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuReturnFixer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ManualCupRayHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PhaseMenuManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayPositionLogger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayResetter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ReturnToPhaseSelection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RuntimeInputAssetAssigner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SimulatedHandController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SimulatedHandMenuSelector.cs" root0="FORCE_HIGHLIGHTING" />
@@ -805,6 +807,33 @@
       <workItem from="1751909144398" duration="67000" />
       <workItem from="1751911305356" duration="303000" />
       <workItem from="1751913154103" duration="100000" />
+      <workItem from="1751980161183" duration="221000" />
+      <workItem from="1751981294375" duration="65000" />
+      <workItem from="1751981935348" duration="270000" />
+      <workItem from="1751983226789" duration="342000" />
+      <workItem from="1751983795589" duration="138000" />
+      <workItem from="1751986114225" duration="94000" />
+      <workItem from="1751986446403" duration="159000" />
+      <workItem from="1751986856689" duration="55000" />
+      <workItem from="1751987764534" duration="193000" />
+      <workItem from="1751989100235" duration="179000" />
+      <workItem from="1751989418798" duration="77000" />
+      <workItem from="1751991741277" duration="647000" />
+      <workItem from="1751993479362" duration="88000" />
+      <workItem from="1751994206003" duration="119000" />
+      <workItem from="1751994979081" duration="353000" />
+      <workItem from="1751996890342" duration="46000" />
+      <workItem from="1751997626094" duration="202000" />
+      <workItem from="1751998915024" duration="139000" />
+      <workItem from="1752067568998" duration="451000" />
+      <workItem from="1752070070551" duration="85000" />
+      <workItem from="1752072502485" duration="174000" />
+      <workItem from="1752073660280" duration="66000" />
+      <workItem from="1752083170757" duration="119000" />
+      <workItem from="1752088428556" duration="44000" />
+      <workItem from="1752090691964" duration="32000" />
+      <workItem from="1752091030093" duration="202000" />
+      <workItem from="1752094618653" duration="42000" />
     </task>
     <servers />
   </component>

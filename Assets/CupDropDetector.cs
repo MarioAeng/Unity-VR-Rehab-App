@@ -5,6 +5,7 @@ public class CupDropDetector : MonoBehaviour
     [HideInInspector] public CupGameManager manager;
     [HideInInspector] public GameObject targetTable;
     public float requiredStayTime = 0.6f;
+    public float safeDropHeight = 1.2f;
 
     private float stayTimer = 0f;
     private bool inZone = false;
@@ -31,16 +32,20 @@ public class CupDropDetector : MonoBehaviour
 
     void Update()
     {
-        if (inZone)
+        if (inZone && transform.position.y <= safeDropHeight + 0.1f)
         {
             stayTimer += Time.deltaTime;
             if (stayTimer >= requiredStayTime)
             {
-                Debug.Log("[DropDetector] Cup stayed on target. Counting rep.");
+                Debug.Log("[DropDetector] ✅ Cup stayed low on target. Counting rep.");
                 manager?.RegisterSuccessfulDrop();
                 stayTimer = 0f;
                 inZone = false;
             }
+        }
+        else if (inZone)
+        {
+            Debug.Log("[DropDetector] ❌ Too high to register rep.");
         }
     }
 }

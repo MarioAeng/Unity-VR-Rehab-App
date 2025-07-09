@@ -188,13 +188,13 @@ MonoBehaviour:
   trainerPromptText: {fileID: 1409021839}
   levelText: {fileID: 1382912734}
   timerText: {fileID: 416966361}
-  spawnRadius: 0.6
-  verticalMin: -0.3
-  verticalMax: 0.2
-  horizontalMin: -0.4
-  horizontalMax: 0.4
+  verticalMin: -0.1
+  verticalMax: 0.1
+  horizontalMin: -0.05
+  horizontalMax: 0.05
   forwardOffset: 2
   baseTargetLifetime: 10
+  baseMinSpacing: 0.3
 --- !u!4 &229910425
 Transform:
   m_ObjectHideFlags: 0
@@ -1559,6 +1559,7 @@ MonoBehaviour:
     m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  yReachMultiplier: 2
 --- !u!114 &863868545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,6 +1616,10 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rayInteractor: {fileID: 0}
+  handTransform: {fileID: 0}
+  rayObject: {fileID: 0}
+  rayOffset: {x: 0, y: -0.15, z: 0.2}
+  extendedRayLength: 25
 --- !u!114 &863868547
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,10 +16,13 @@ public class CupGameManager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI TrainerPrompt;
     public TextMeshProUGUI RepCounterText;
+    public TextMeshProUGUI TimeText;
 
     private int totalReps = 10;
     private int repsCompleted = 0;
+    private int repsSuccessful = 0;
     private int currentLevel = 1;
+    private int requiredSuccesses = 8;
 
     private List<GameObject> activeTables = new();
     private GameObject activeCup;
@@ -29,9 +32,28 @@ public class CupGameManager : MonoBehaviour
     private float platformSpacing = 1.4f;
     private float zClampMin = -1.5f, zClampMax = 1.5f;
 
+    private float repTimer = 0f;
+    private float repTimeLimit = 10f;
+    private bool isTiming = false;
+
     void Start()
     {
         InitializeLevel();
+    }
+
+    void Update()
+    {
+        if (currentLevel >= 2 && isTiming)
+        {
+            repTimer -= Time.deltaTime;
+            TimeText.text = $"Time Left: {Mathf.Ceil(repTimer)}s";
+
+            if (repTimer <= 0f)
+            {
+                Debug.Log("[Timer] Time's up! Resetting cup.");
+                ResetCupWithoutCountingRep();
+            }
+        }
     }
 
     void InitializeLevel()
@@ -39,8 +61,8 @@ public class CupGameManager : MonoBehaviour
         Debug.Log($"[Manager] Level {currentLevel} Init");
         ClearPreviousObjects();
         repsCompleted = 0;
+        repsSuccessful = 0;
         UpdateRepCounter();
-
         TrainerPrompt.text = $"Deliver {totalReps} cups!";
         SpawnTables(currentLevel);
         SpawnCup();
@@ -59,9 +81,9 @@ public class CupGameManager : MonoBehaviour
     {
         int count = Mathf.Clamp(2 + level, 2, 6);
         float radius = 1.5f + level * 0.4f;
-
         int tries = 0;
-        while (activeTables.Count < count && tries < 100)
+
+        while (activeTables.Count < count && tries < 200)
         {
             Vector3 offset = new Vector3(Random.Range(-radius, radius), 0f, Random.Range(zClampMin, zClampMax));
             Vector3 pos = SpawnStartPoint.position + offset;
@@ -80,27 +102,34 @@ public class CupGameManager : MonoBehaviour
             {
                 GameObject table = Instantiate(DropTable, pos, Quaternion.identity);
                 activeTables.Add(table);
+                Debug.Log($"[SpawnTables] Placed table at {pos}");
             }
 
             tries++;
         }
 
-        targetTable = activeTables[Random.Range(0, activeTables.Count)];
+        if (activeTables.Count < 2)
+        {
+            Debug.LogError("[SpawnTables] Not enough tables placed. Try increasing spacing or radius.");
+            return;
+        }
 
-        do {
+        int safetyTries = 0;
+        do
+        {
             startTable = activeTables[Random.Range(0, activeTables.Count)];
-        } while (startTable == targetTable);
+            targetTable = activeTables[Random.Range(0, activeTables.Count)];
+            safetyTries++;
+        } while (startTable == targetTable && safetyTries < 100);
 
         foreach (var table in activeTables)
         {
             var rend = table.GetComponent<Renderer>();
             if (rend)
-            {
                 rend.material = (table == targetTable) ? dropTableVisibleMat : defaultPlatformMat;
-            }
         }
 
-        Debug.Log($"[Tables] Start: {startTable.name}, Target: {targetTable.name}");
+        Debug.Log($"[Tables] Start: {startTable.name} | Target: {targetTable.name}");
     }
 
     void SpawnCup()
@@ -109,30 +138,38 @@ public class CupGameManager : MonoBehaviour
         activeCup = Instantiate(Cup, pos, Quaternion.identity);
         activeCup.SetActive(true);
 
-        // Find CupDropDetector on the child (TriggerZone)
         CupDropDetector detector = activeCup.GetComponentInChildren<CupDropDetector>();
         if (detector)
         {
             detector.manager = this;
             detector.targetTable = targetTable;
             detector.requiredStayTime = currentLevel >= 2 ? 0.6f : 0f;
-
-            Debug.Log("[SpawnCup] Detector set on TriggerZone child.");
+            Debug.Log("[SpawnCup] Detector configured.");
         }
         else
         {
-            Debug.LogWarning("[SpawnCup] CupDropDetector not found in child.");
+            Debug.LogWarning("[SpawnCup] No CupDropDetector found!");
         }
 
         var rend = activeCup.GetComponent<Renderer>();
         if (rend) rend.material = cupVisibleMat;
 
-        Debug.Log("[SpawnCup] Cup spawned and visible.");
+        if (currentLevel >= 2)
+        {
+            repTimer = repTimeLimit;
+            isTiming = true;
+        }
+        else
+        {
+            TimeText.text = "";
+            isTiming = false;
+        }
     }
 
     public void RegisterSuccessfulDrop()
     {
         Debug.Log($"[Progress] Rep {repsCompleted + 1} / {totalReps}");
+        isTiming = false;
 
         if (activeCup != null)
         {
@@ -141,6 +178,7 @@ public class CupGameManager : MonoBehaviour
         }
 
         repsCompleted++;
+        repsSuccessful++;
         UpdateRepCounter();
 
         if (repsCompleted < totalReps)
@@ -154,14 +192,55 @@ public class CupGameManager : MonoBehaviour
         }
         else
         {
-            TrainerPrompt.text = $"Level {currentLevel} complete!";
-            currentLevel++;
-            InitializeLevel();
+            if (repsSuccessful >= requiredSuccesses)
+            {
+                TrainerPrompt.text = $"Level {currentLevel} complete!";
+                currentLevel++;
+                InitializeLevel();
+            }
+            else
+            {
+                TrainerPrompt.text = $"Only {repsSuccessful}/{totalReps} correct. Try again!";
+                InitializeLevel();
+            }
+        }
+    }
+
+    void ResetCupWithoutCountingRep()
+    {
+        isTiming = false;
+
+        if (activeCup != null)
+        {
+            Destroy(activeCup);
+            activeCup = null;
+        }
+
+        repsCompleted++;
+        UpdateRepCounter();
+
+        if (repsCompleted < totalReps)
+        {
+            SpawnCup();
+        }
+        else
+        {
+            if (repsSuccessful >= requiredSuccesses)
+            {
+                TrainerPrompt.text = $"Level {currentLevel} complete!";
+                currentLevel++;
+                InitializeLevel();
+            }
+            else
+            {
+                TrainerPrompt.text = $"Only {repsSuccessful}/{totalReps} correct. Try again!";
+                InitializeLevel();
+            }
         }
     }
 
     void UpdateRepCounter()
     {
-        RepCounterText.text = $"Delivered: {repsCompleted}/{totalReps}";
+        RepCounterText.text = $"Delivered: {repsSuccessful}/{totalReps}";
     }
 }
