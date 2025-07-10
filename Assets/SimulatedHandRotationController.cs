@@ -10,11 +10,8 @@ public class SimulatedHandRotationController : MonoBehaviour
     public TMP_Text repCounterText;
 
     [Header("Rep Settings")]
-    public float rotationThreshold = 15f; // degrees
+    public float rotationThreshold = 15f;
     public float requiredHoldTime = 1.5f;
-
-    [Header("Target Rotation (Euler angles)")]
-    public Vector3 targetEuler = new Vector3(0f, 0f, 90f); // Example: 90-degree z-rotation
 
     [Header("Input Action Names")]
     public string gripActionName = "GripAction";
@@ -37,6 +34,8 @@ public class SimulatedHandRotationController : MonoBehaviour
 
     private Vector3 offset = new Vector3(0f, -0.4f, 0.3f);
     private Quaternion targetRotation;
+    private bool isCalibrated = false;
+    private bool wasTriggerPressed = false;
 
     private void OnEnable()
     {
@@ -62,7 +61,8 @@ public class SimulatedHandRotationController : MonoBehaviour
         positionAction?.Enable();
         rotationAction?.Enable();
 
-        targetRotation = Quaternion.Euler(targetEuler);
+        trainerPrompt.text = "Rotate your arm to max position, then press trigger to calibrate.";
+        repCounterText.text = "Reps: 0";
     }
 
     private void OnDisable()
@@ -72,60 +72,85 @@ public class SimulatedHandRotationController : MonoBehaviour
 
     private void Update()
     {
-        if (positionAction != null && rotationAction != null)
+        if (positionAction == null || rotationAction == null || triggerAction == null || resetAction == null)
+            return;
+
+        Vector3 rawPosition = positionAction.ReadValue<Vector3>();
+        Quaternion currentRotation = rotationAction.ReadValue<Quaternion>();
+        Vector3 adjustedPosition = rawPosition + offset;
+        transform.SetPositionAndRotation(adjustedPosition, currentRotation);
+
+        float triggerValue = triggerAction.ReadValue<float>();
+        bool triggerPressed = triggerValue > 0.5f;
+
+        if (!isCalibrated)
         {
-            Vector3 rawPosition = positionAction.ReadValue<Vector3>();
-            Quaternion rotation = rotationAction.ReadValue<Quaternion>();
-            Vector3 adjustedPosition = rawPosition + offset;
-            transform.SetPositionAndRotation(adjustedPosition, rotation);
-
-            float angleDifference = Quaternion.Angle(rotation, targetRotation);
-
-            if (waitingForReset)
+            if (triggerPressed && !wasTriggerPressed)
             {
-                if (angleDifference > rotationThreshold * 2f)
-                {
-                    waitingForReset = false;
-                    trainerPrompt.text = "Rotate to begin again.";
-                }
-                else
-                {
-                    trainerPrompt.text = "Return to rest position.";
-                }
-                return;
-            }
-
-            if (angleDifference <= rotationThreshold)
-            {
-                holdTimer += Time.deltaTime;
-                trainerPrompt.text = "Hold that rotation!";
-
-                if (!isInCorrectPose && holdTimer >= requiredHoldTime)
-                {
-                    isInCorrectPose = true;
-                    waitingForReset = true;
-                    repCount++;
-                    repCounterText.text = $"Reps: {repCount}";
-                    Debug.Log($"[SimHand] Rotation rep completed: {repCount}");
-                }
+                targetRotation = currentRotation;
+                isCalibrated = true;
+                trainerPrompt.text = "Calibration complete! Rotate to begin.";
+                Debug.Log("[SimHand] ✅ Rotation calibrated.");
             }
             else
             {
-                holdTimer = 0f;
-                isInCorrectPose = false;
-                trainerPrompt.text = "Rotate your arm!";
+                trainerPrompt.text = "Rotate arm to target position, then press trigger.";
             }
+
+            wasTriggerPressed = triggerPressed;
+            return;
         }
 
-        if (resetAction != null && resetAction.triggered)
+        float angleDifference = Quaternion.Angle(currentRotation, targetRotation);
+
+        if (waitingForReset)
+        {
+            if (angleDifference > rotationThreshold * 2f)
+            {
+                waitingForReset = false;
+                trainerPrompt.text = "Rotate to begin again.";
+            }
+            else
+            {
+                trainerPrompt.text = "Return to rest position.";
+            }
+            return;
+        }
+
+        if (angleDifference <= rotationThreshold)
+        {
+            holdTimer += Time.deltaTime;
+            trainerPrompt.text = "Hold that rotation!";
+
+            if (!isInCorrectPose && holdTimer >= requiredHoldTime)
+            {
+                isInCorrectPose = true;
+                waitingForReset = true;
+                repCount++;
+                repCounterText.text = $"Reps: {repCount}";
+                Debug.Log($"[SimHand] ✅ Rotation rep completed: {repCount}");
+            }
+        }
+        else
+        {
+            holdTimer = 0f;
+            isInCorrectPose = false;
+            trainerPrompt.text = "Rotate your arm!";
+        }
+
+        // Reset logic
+        if (resetAction.triggered)
         {
             repCount = 0;
             holdTimer = 0f;
             isInCorrectPose = false;
             waitingForReset = false;
-            repCounterText.text = $"Reps: {repCount}";
-            trainerPrompt.text = "Reset complete.";
-            Debug.Log("[SimHand] Reps reset.");
+            isCalibrated = false;
+            repCounterText.text = "Reps: 0";
+            trainerPrompt.text = "Reset. Rotate and press trigger to recalibrate.";
+            Debug.Log("[SimHand] 🔄 Reset complete.");
         }
+
+        wasTriggerPressed = triggerPressed;
     }
 }

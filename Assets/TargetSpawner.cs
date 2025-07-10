@@ -12,15 +12,16 @@ public class TargetSpawner : MonoBehaviour
     public TMP_Text timerText;
 
     [Header("Spawn Settings")]
-    public float verticalMin = -0.1f;
-    public float verticalMax = 0.1f;
-    public float horizontalMin = -0.05f;
-    public float horizontalMax = 0.05f;
+    public float verticalMin = -0.25f;
+    public float verticalMax = 0.25f;
+    public float horizontalMin = -0.3f;  // max safe range
+    public float horizontalMax = 0.3f;
     public float forwardOffset = 2f;
 
     [Header("Gameplay Settings")]
     public float baseTargetLifetime = 10f;
-    public float baseMinSpacing = 0.3f;
+    public float minJumpDistanceX = 0.25f;
+    public float minJumpDistanceY = 0.12f;
 
     private int repsThisLevel = 0;
     private int hitsThisLevel = 0;
@@ -30,7 +31,8 @@ public class TargetSpawner : MonoBehaviour
     private bool targetActive = false;
     private bool hasShownInstructions = false;
 
-    private Vector3 lastSpawnPosition;
+    private float lastXOffset = 0f;
+    private float lastYOffset = 0f;
     private bool hasSpawnedBefore = false;
 
     void Start()
@@ -130,42 +132,49 @@ public class TargetSpawner : MonoBehaviour
             return;
         }
 
-        float minDistanceFromLastSpawn = baseMinSpacing + 0.05f * (level - 1);
-        float maxSpacing = 0.2f; // since horizontalMin/Max are narrow
-        minDistanceFromLastSpawn = Mathf.Min(minDistanceFromLastSpawn, maxSpacing);
-
-        Vector3 spawnPosition;
-        int tries = 0;
+        float xOffset = 0f;
+        float yOffset = 0f;
+        int attempts = 0;
 
         do
         {
-            float xOffset = Random.Range(horizontalMin, horizontalMax);
-            float yOffset = Random.Range(verticalMin, verticalMax);
-            Vector3 offset = new Vector3(xOffset, yOffset, forwardOffset);
-            spawnPosition = handOrigin.position + handOrigin.TransformDirection(offset);
+            float dirX = Random.value < 0.5f ? -1f : 1f;
+            float jumpX = Random.Range(minJumpDistanceX, horizontalMax);
+            xOffset = Mathf.Clamp(lastXOffset + dirX * jumpX, horizontalMin, horizontalMax);
 
-            tries++;
-            if (tries > 15) break;
+            float dirY = Random.value < 0.5f ? -1f : 1f;
+            float jumpY = Random.Range(minJumpDistanceY, verticalMax);
+            yOffset = Mathf.Clamp(lastYOffset + dirY * jumpY, verticalMin, verticalMax);
 
-        } while (hasSpawnedBefore && Vector3.Distance(spawnPosition, lastSpawnPosition) < minDistanceFromLastSpawn);
+            attempts++;
+            if (attempts > 10) break;
+
+        } while (hasSpawnedBefore &&
+                Mathf.Abs(xOffset - lastXOffset) < minJumpDistanceX &&
+                Mathf.Abs(yOffset - lastYOffset) < minJumpDistanceY);
+
+        Vector3 offset = new Vector3(xOffset, yOffset, forwardOffset);
+        Vector3 spawnPosition = handOrigin.position + handOrigin.TransformDirection(offset);
 
         currentTarget = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
         currentTarget.tag = "TargetCube";
 
         float baseScale = 0.2f;
-        float sizeMultiplier = Mathf.Max(0.5f, 1f - 0.1f * (level - 1));
-        currentTarget.transform.localScale = Vector3.one * baseScale * sizeMultiplier;
+        float minScale = 0.06f;
+        float scaleMultiplier = Mathf.Max(minScale, 1f - 0.1f * (level - 1));
+        currentTarget.transform.localScale = Vector3.one * baseScale * scaleMultiplier;
 
-        lastSpawnPosition = spawnPosition;
+        lastXOffset = xOffset;
+        lastYOffset = yOffset;
         hasSpawnedBefore = true;
 
         if (level >= 3)
         {
-            float difficultyAdjustedLifetime = Mathf.Max(1.5f, baseTargetLifetime - (level * 0.5f));
+            float difficultyAdjustedLifetime = Mathf.Max(0.7f, baseTargetLifetime - (level * 1.0f));
             currentTimer = difficultyAdjustedLifetime;
             targetActive = true;
         }
 
-        Debug.Log($"[TargetSpawner] Spawned target at {spawnPosition} | Level: {level}");
+        Debug.Log($"[TargetSpawner] Spawned target at {spawnPosition} | Scale: {currentTarget.transform.localScale} | Lifetime: {currentTimer:F1}s");
     }
 }
