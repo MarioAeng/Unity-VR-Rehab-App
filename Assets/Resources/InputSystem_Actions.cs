@@ -1135,6 +1135,51 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftHandPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""ec029aed-146f-4b01-baaa-dc154429a7e6"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftHandRotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""427e60d4-e139-430c-9a75-cc8879c20cb0"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftTriggerAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec0b0ddc-f983-4aff-8749-3b649f32ae4d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftResetAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6749a97-c186-45a1-b0c3-77a8118c84d9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftBackAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""80cf58b1-93bd-44bb-867d-8f54a44db7b3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1258,6 +1303,61 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""BackAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ea9c0b4-d67d-41f5-9aa1-8b608c2a7762"",
+                    ""path"": ""<XRController>{LeftHand}/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHandPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edb77683-b480-4b82-bd3b-a1f7b5849794"",
+                    ""path"": ""<XRController>{LeftHand}/deviceRotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHandRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46499a01-f70a-45f6-8438-d796d41e669c"",
+                    ""path"": ""<XRController>{LeftHand}/{trigger}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftTriggerAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edf1dc48-b650-4055-8e05-e2f881861ac8"",
+                    ""path"": ""<XRController>{LeftHand}/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftResetAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3d4d051-0210-42db-bd5d-c2254bb5865d"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftBackAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1361,6 +1461,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_SimulatedHandMap_TrackedDevicePosition = m_SimulatedHandMap.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_SimulatedHandMap_TrackedDeviceOrientation = m_SimulatedHandMap.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_SimulatedHandMap_BackAction = m_SimulatedHandMap.FindAction("BackAction", throwIfNotFound: true);
+        m_SimulatedHandMap_LeftHandPosition = m_SimulatedHandMap.FindAction("LeftHandPosition", throwIfNotFound: true);
+        m_SimulatedHandMap_LeftHandRotation = m_SimulatedHandMap.FindAction("LeftHandRotation", throwIfNotFound: true);
+        m_SimulatedHandMap_LeftTriggerAction = m_SimulatedHandMap.FindAction("LeftTriggerAction", throwIfNotFound: true);
+        m_SimulatedHandMap_LeftResetAction = m_SimulatedHandMap.FindAction("LeftResetAction", throwIfNotFound: true);
+        m_SimulatedHandMap_LeftBackAction = m_SimulatedHandMap.FindAction("LeftBackAction", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1833,6 +1938,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_SimulatedHandMap_TrackedDevicePosition;
     private readonly InputAction m_SimulatedHandMap_TrackedDeviceOrientation;
     private readonly InputAction m_SimulatedHandMap_BackAction;
+    private readonly InputAction m_SimulatedHandMap_LeftHandPosition;
+    private readonly InputAction m_SimulatedHandMap_LeftHandRotation;
+    private readonly InputAction m_SimulatedHandMap_LeftTriggerAction;
+    private readonly InputAction m_SimulatedHandMap_LeftResetAction;
+    private readonly InputAction m_SimulatedHandMap_LeftBackAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "SimulatedHandMap".
     /// </summary>
@@ -1888,6 +1998,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "SimulatedHandMap/BackAction".
         /// </summary>
         public InputAction @BackAction => m_Wrapper.m_SimulatedHandMap_BackAction;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/LeftHandPosition".
+        /// </summary>
+        public InputAction @LeftHandPosition => m_Wrapper.m_SimulatedHandMap_LeftHandPosition;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/LeftHandRotation".
+        /// </summary>
+        public InputAction @LeftHandRotation => m_Wrapper.m_SimulatedHandMap_LeftHandRotation;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/LeftTriggerAction".
+        /// </summary>
+        public InputAction @LeftTriggerAction => m_Wrapper.m_SimulatedHandMap_LeftTriggerAction;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/LeftResetAction".
+        /// </summary>
+        public InputAction @LeftResetAction => m_Wrapper.m_SimulatedHandMap_LeftResetAction;
+        /// <summary>
+        /// Provides access to the underlying input action "SimulatedHandMap/LeftBackAction".
+        /// </summary>
+        public InputAction @LeftBackAction => m_Wrapper.m_SimulatedHandMap_LeftBackAction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1947,6 +2077,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @BackAction.started += instance.OnBackAction;
             @BackAction.performed += instance.OnBackAction;
             @BackAction.canceled += instance.OnBackAction;
+            @LeftHandPosition.started += instance.OnLeftHandPosition;
+            @LeftHandPosition.performed += instance.OnLeftHandPosition;
+            @LeftHandPosition.canceled += instance.OnLeftHandPosition;
+            @LeftHandRotation.started += instance.OnLeftHandRotation;
+            @LeftHandRotation.performed += instance.OnLeftHandRotation;
+            @LeftHandRotation.canceled += instance.OnLeftHandRotation;
+            @LeftTriggerAction.started += instance.OnLeftTriggerAction;
+            @LeftTriggerAction.performed += instance.OnLeftTriggerAction;
+            @LeftTriggerAction.canceled += instance.OnLeftTriggerAction;
+            @LeftResetAction.started += instance.OnLeftResetAction;
+            @LeftResetAction.performed += instance.OnLeftResetAction;
+            @LeftResetAction.canceled += instance.OnLeftResetAction;
+            @LeftBackAction.started += instance.OnLeftBackAction;
+            @LeftBackAction.performed += instance.OnLeftBackAction;
+            @LeftBackAction.canceled += instance.OnLeftBackAction;
         }
 
         /// <summary>
@@ -1991,6 +2136,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @BackAction.started -= instance.OnBackAction;
             @BackAction.performed -= instance.OnBackAction;
             @BackAction.canceled -= instance.OnBackAction;
+            @LeftHandPosition.started -= instance.OnLeftHandPosition;
+            @LeftHandPosition.performed -= instance.OnLeftHandPosition;
+            @LeftHandPosition.canceled -= instance.OnLeftHandPosition;
+            @LeftHandRotation.started -= instance.OnLeftHandRotation;
+            @LeftHandRotation.performed -= instance.OnLeftHandRotation;
+            @LeftHandRotation.canceled -= instance.OnLeftHandRotation;
+            @LeftTriggerAction.started -= instance.OnLeftTriggerAction;
+            @LeftTriggerAction.performed -= instance.OnLeftTriggerAction;
+            @LeftTriggerAction.canceled -= instance.OnLeftTriggerAction;
+            @LeftResetAction.started -= instance.OnLeftResetAction;
+            @LeftResetAction.performed -= instance.OnLeftResetAction;
+            @LeftResetAction.canceled -= instance.OnLeftResetAction;
+            @LeftBackAction.started -= instance.OnLeftBackAction;
+            @LeftBackAction.performed -= instance.OnLeftBackAction;
+            @LeftBackAction.canceled -= instance.OnLeftBackAction;
         }
 
         /// <summary>
@@ -2322,5 +2482,40 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBackAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftHandPosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftHandPosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftHandRotation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftHandRotation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftTriggerAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftTriggerAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftResetAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftResetAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftBackAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftBackAction(InputAction.CallbackContext context);
     }
 }

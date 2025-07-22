@@ -5,7 +5,6 @@ using TMPro;
 public class SimulatedHandController : MonoBehaviour
 {
     [Header("Setup")]
-    public string inputAssetName = "InputSystem_Actions";
     public TMP_Text trainerPrompt;
     public TMP_Text repCounterText;
 
@@ -15,16 +14,16 @@ public class SimulatedHandController : MonoBehaviour
 
     [Header("Target Position (Calibration-based)")]
     public float targetX = 0f;
-    public float targetY = 1.3f; // Gets set during calibration
+    public float targetY = 1.3f;
 
-    [Header("Input Action Names")]
+    [Header("Input")]
+    public InputActionAsset inputActionAsset;
     public string gripActionName = "GripAction";
     public string triggerActionName = "TriggerAction";
     public string resetActionName = "ResetAction";
     public string positionActionName = "RightHandPosition";
     public string rotationActionName = "RightHandRotation";
 
-    private InputActionAsset inputActionAsset;
     private InputAction gripAction;
     private InputAction triggerAction;
     private InputAction resetAction;
@@ -35,52 +34,60 @@ public class SimulatedHandController : MonoBehaviour
     private float holdTimer = 0f;
     private bool isInCorrectPose = false;
     private bool waitingForReset = false;
-
     private Vector3 offset = new Vector3(0f, -0.4f, 0.3f);
-
     private bool isCalibrated = false;
 
     private void OnEnable()
     {
-        inputActionAsset = Resources.Load<InputActionAsset>(inputAssetName);
-
         if (inputActionAsset == null)
         {
-            Debug.LogError("[SimHand] ❌ InputActionAsset not found.");
+            Debug.LogError("[SimHand] ❌ InputActionAsset not assigned in Inspector.");
             return;
         }
 
-        inputActionAsset.Enable();
+        var map = inputActionAsset.FindActionMap("SimulatedHandMap");
+        if (map == null)
+        {
+            Debug.LogError("[SimHand] ❌ Could not find action map 'SimulatedHandMap'.");
+            return;
+        }
 
-        gripAction = inputActionAsset.FindAction(gripActionName);
-        triggerAction = inputActionAsset.FindAction(triggerActionName);
-        resetAction = inputActionAsset.FindAction(resetActionName);
-        positionAction = inputActionAsset.FindAction(positionActionName);
-        rotationAction = inputActionAsset.FindAction(rotationActionName);
+        gripAction = map.FindAction(gripActionName);
+        triggerAction = map.FindAction(triggerActionName);
+        resetAction = map.FindAction(resetActionName);
+        positionAction = map.FindAction(positionActionName);
+        rotationAction = map.FindAction(rotationActionName);
 
         gripAction?.Enable();
         triggerAction?.Enable();
         resetAction?.Enable();
         positionAction?.Enable();
         rotationAction?.Enable();
+
+        Debug.Log($"[SimHand] ✅ Using PositionAction: {positionAction?.name}, RotationAction: {rotationAction?.name}");
     }
 
     private void OnDisable()
     {
-        inputActionAsset?.Disable();
+        gripAction?.Disable();
+        triggerAction?.Disable();
+        resetAction?.Disable();
+        positionAction?.Disable();
+        rotationAction?.Disable();
     }
 
     private void Update()
     {
-        // Track and move simulated hand
-        if (positionAction != null && rotationAction != null)
+        if (positionAction == null || rotationAction == null)
         {
-            Vector3 rawPosition = positionAction.ReadValue<Vector3>();
-            Quaternion rotation = rotationAction.ReadValue<Quaternion>();
-            Vector3 adjustedPosition = rawPosition + offset;
-
-            transform.SetPositionAndRotation(adjustedPosition, rotation);
+            Debug.LogWarning("[SimHand] 🚫 Position or rotation action missing.");
+            return;
         }
+
+        Vector3 rawPosition = positionAction.ReadValue<Vector3>();
+        Quaternion rotation = rotationAction.ReadValue<Quaternion>();
+        Vector3 adjustedPosition = rawPosition + offset;
+        transform.SetPositionAndRotation(adjustedPosition, rotation);
 
         if (!isCalibrated)
         {
@@ -94,7 +101,6 @@ public class SimulatedHandController : MonoBehaviour
                 trainerPrompt.text = "✅ Calibration complete. Start raising your hand.";
                 Debug.Log($"[SimHand] 🎯 Calibrated height set to Y = {targetY:F2}");
             }
-
             return;
         }
 

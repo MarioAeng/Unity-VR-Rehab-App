@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Samples/XR Interaction Toolkit/Scenes/HandednessSelectorScene.unity
+    guid: fa8657dfa1974f3448d7de1ffc9b1efa
+  - enabled: 1
     path: Assets/Samples/XR Interaction Toolkit/Scenes/PhaseSelectionScene.unity
     guid: 16766daaa0681864280e8eead21031a1
   - enabled: 1

@@ -15,8 +15,13 @@ public class PhaseButtonHighlighter : MonoBehaviour
     }
 
     public Transform canvasTransform;
-    public Transform handTransform;
-    public InputActionProperty triggerAction;
+
+    [Header("Hand References")]
+    public Transform leftHandTransform;
+    public Transform rightHandTransform;
+    public InputActionProperty leftTriggerAction;
+    public InputActionProperty rightTriggerAction;
+
     public Color normalColor = Color.white;
     public Color highlightColor = Color.green;
 
@@ -31,19 +36,19 @@ public class PhaseButtonHighlighter : MonoBehaviour
         buttons = new ButtonBounds[]
         {
             new ButtonBounds {
-                sceneName = "MainMenuScene", // Phase 1
+                sceneName = "MainMenuScene",
                 centerLocalXY = new Vector2(0, 120f),
                 size = new Vector2(600f, 220f),
                 image = GameObject.Find("PhaseOneButton")?.GetComponent<Image>()
             },
             new ButtonBounds {
-                sceneName = "Phase2MenuScene", // Phase 2
+                sceneName = "Phase2MenuScene",
                 centerLocalXY = new Vector2(0, 80f),
                 size = new Vector2(600f, 200f),
                 image = GameObject.Find("PhaseTwoButton")?.GetComponent<Image>()
             },
             new ButtonBounds {
-                sceneName = "Phase3MenuScene", // Phase 3
+                sceneName = "Phase3MenuScene",
                 centerLocalXY = new Vector2(0, 40f),
                 size = new Vector2(600f, 200f),
                 image = GameObject.Find("PhaseThreeButton")?.GetComponent<Image>()
@@ -53,11 +58,19 @@ public class PhaseButtonHighlighter : MonoBehaviour
 
     void Update()
     {
-        if (sceneLoading || triggerAction.action == null || handTransform == null || canvasTransform == null)
+        if (sceneLoading || canvasTransform == null)
         {
             Debug.LogWarning("[PhaseButtonHighlighter] 🚫 Missing references or scene is loading.");
             return;
         }
+
+        HandleHand(leftHandTransform, leftTriggerAction, "👈 Left");
+        HandleHand(rightHandTransform, rightTriggerAction, "👉 Right");
+    }
+
+    void HandleHand(Transform handTransform, InputActionProperty triggerAction, string handLabel)
+    {
+        if (handTransform == null || triggerAction.action == null) return;
 
         Vector3 handLocal = canvasTransform.InverseTransformPoint(handTransform.position);
         handLocal.y *= yReachMultiplier;
@@ -65,7 +78,7 @@ public class PhaseButtonHighlighter : MonoBehaviour
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool triggerPressed = triggerValue > 0.5f;
 
-        Debug.Log($"[PhaseHighlight] ✋ Adjusted Hand Local: {handLocal}, 🔫 Trigger: {triggerValue:F2}");
+        Debug.Log($"[PhaseHighlight] {handLabel} Hand Local: {handLocal}, Trigger: {triggerValue:F2}");
 
         ButtonBounds matchedButton = null;
 
@@ -79,10 +92,11 @@ public class PhaseButtonHighlighter : MonoBehaviour
             bool inX = dx <= half.x;
             bool inY = dy <= half.y;
 
-            if (inX && inY && matchedButton == null)
+            if (inX && inY)
             {
                 matchedButton = btn;
-                Debug.Log($"[PhaseHighlight] 🎯 Hit {btn.sceneName} | dx={dx:F1}, dy={dy:F1}");
+                Debug.Log($"[PhaseHighlight] {handLabel} 🎯 Matched {btn.sceneName}");
+                break;
             }
         }
 
@@ -94,9 +108,13 @@ public class PhaseButtonHighlighter : MonoBehaviour
 
         if (triggerPressed && matchedButton != null)
         {
-            Debug.Log($"[PhaseHighlight] ✅ Loading {matchedButton.sceneName}");
+            Debug.Log($"[PhaseHighlight] {handLabel} ✅ Loading {matchedButton.sceneName}");
             sceneLoading = true;
             SceneManager.LoadScene(matchedButton.sceneName);
+        }
+        else if (triggerPressed && matchedButton == null)
+        {
+            Debug.Log($"[PhaseHighlight] {handLabel} ❌ Trigger pressed but no button matched.");
         }
     }
 }

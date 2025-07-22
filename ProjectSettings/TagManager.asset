@@ -11,6 +11,7 @@ TagManager:
   - DropZone
   - Ground
   - DropPlatform
+  - UISelectable
   layers:
   - Default
   - TransparentFX

@@ -71,13 +71,14 @@ public class ElbowRotationTracker : MonoBehaviour
 
     void Update()
     {
-        if (positionAction == null || triggerAction == null)
+        if (positionAction == null || triggerAction == null || rotationAction == null)
             return;
 
-        // Read hand position and apply offset
+        // Read hand position and apply offset and rotation
         Vector3 rawPos = positionAction.ReadValue<Vector3>();
+        Quaternion handRot = rotationAction.ReadValue<Quaternion>();
         Vector3 handPos = rawPos + offset;
-        transform.position = handPos;
+        transform.SetPositionAndRotation(handPos, handRot);
 
         float x = handPos.x;
         bool triggerPressed = triggerAction.ReadValue<float>() > 0.5f;

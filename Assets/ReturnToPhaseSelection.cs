@@ -4,43 +4,60 @@ using UnityEngine.SceneManagement;
 
 public class ReturnToPhaseSelection : MonoBehaviour
 {
-    [Header("Input Action")]
-    public InputActionProperty backAction;
+    [Header("Input Actions")]
+    public InputActionProperty leftBackAction;
+    public InputActionProperty rightBackAction;
 
     [Header("Scene Name")]
-    public string phaseSelectionSceneName = "PhaseSelectionScene"; // Default target
+    public string phaseSelectionSceneName = "PhaseSelectionScene";
 
     void OnEnable()
     {
-        if (backAction.action != null)
+        if (leftBackAction.action != null)
         {
-            backAction.action.Enable();
-            backAction.action.performed += OnBackPressed;
+            leftBackAction.action.Enable();
+            leftBackAction.action.performed += OnBackPressed;
         }
-        else
+
+        if (rightBackAction.action != null)
         {
-            Debug.LogWarning("[ReturnToPhaseSelection] BackAction is not assigned.");
+            rightBackAction.action.Enable();
+            rightBackAction.action.performed += OnBackPressed;
+        }
+
+        if (leftBackAction.action == null && rightBackAction.action == null)
+        {
+            Debug.LogWarning("[ReturnToPhaseSelection] ❌ Both BackActions are unassigned.");
         }
     }
 
     void OnDisable()
     {
-        if (backAction.action != null)
-        {
-            backAction.action.performed -= OnBackPressed;
-        }
+        if (leftBackAction.action != null)
+            leftBackAction.action.performed -= OnBackPressed;
+
+        if (rightBackAction.action != null)
+            rightBackAction.action.performed -= OnBackPressed;
     }
 
     void Update()
     {
-        if (backAction.action != null)
+        if (leftBackAction.action != null)
         {
-            float val = backAction.action.ReadValue<float>();
-            Debug.Log($"[BackAction Raw Value] {val}");
-
-            if (backAction.action.WasPressedThisFrame())
+            float val = leftBackAction.action.ReadValue<float>();
+            if (leftBackAction.action.WasPressedThisFrame())
             {
-                Debug.Log("[ReturnToPhaseSelection] B Press Detected (WasPressedThisFrame)");
+                Debug.Log("[ReturnToPhaseSelection] 🟢 Left B pressed");
+                LoadPhaseMenu();
+            }
+        }
+
+        if (rightBackAction.action != null)
+        {
+            float val = rightBackAction.action.ReadValue<float>();
+            if (rightBackAction.action.WasPressedThisFrame())
+            {
+                Debug.Log("[ReturnToPhaseSelection] 🟢 Right B pressed");
                 LoadPhaseMenu();
             }
         }
@@ -48,13 +65,13 @@ public class ReturnToPhaseSelection : MonoBehaviour
 
     void OnBackPressed(InputAction.CallbackContext context)
     {
-        Debug.Log("[ReturnToPhaseSelection] B Press Detected (performed callback)");
+        Debug.Log("[ReturnToPhaseSelection] 🔁 B Button Callback");
         LoadPhaseMenu();
     }
 
     void LoadPhaseMenu()
     {
-        Debug.Log("[ReturnToPhaseSelection] Loading Phase Selection Scene...");
+        Debug.Log("[ReturnToPhaseSelection] 📂 Loading Phase Selection Scene...");
         SceneManager.LoadScene(phaseSelectionSceneName);
     }
 }

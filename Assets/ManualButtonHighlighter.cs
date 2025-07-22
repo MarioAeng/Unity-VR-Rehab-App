@@ -15,13 +15,18 @@ public class ManualButtonHighlighter : MonoBehaviour
     }
 
     public Transform canvasTransform;
-    public Transform handTransform;
-    public InputActionProperty triggerAction;
+
+    [Header("Hand References")]
+    public Transform leftHandTransform;
+    public Transform rightHandTransform;
+    public InputActionProperty leftTriggerAction;
+    public InputActionProperty rightTriggerAction;
+
     public Color normalColor = Color.white;
     public Color highlightColor = Color.green;
 
     [Header("Ray Reach Settings")]
-    public float yReachMultiplier = 2f; // ✅ Default is 2x downward reach
+    public float yReachMultiplier = 2f;
 
     private bool sceneLoading = false;
     private ButtonBounds[] buttons;
@@ -65,21 +70,28 @@ public class ManualButtonHighlighter : MonoBehaviour
 
     void Update()
     {
-        if (sceneLoading || triggerAction.action == null || handTransform == null || canvasTransform == null)
+        if (sceneLoading || canvasTransform == null)
         {
-            Debug.LogWarning("[ManualButtonHighlighter] 🚫 Missing references or scene is loading.");
+            Debug.LogWarning("[ManualButtonHighlighter] 🚫 Missing canvas or scene is loading.");
             return;
         }
 
-        Vector3 handLocal = canvasTransform.InverseTransformPoint(handTransform.position);
+        HandleHand(leftHandTransform, leftTriggerAction, "👈 Left");
+        HandleHand(rightHandTransform, rightTriggerAction, "👉 Right");
+    }
 
-        // ✅ Multiply Y to simulate reaching further
+    void HandleHand(Transform handTransform, InputActionProperty triggerAction, string handLabel)
+    {
+        if (sceneLoading || handTransform == null || triggerAction.action == null)
+            return;
+
+        Vector3 handLocal = canvasTransform.InverseTransformPoint(handTransform.position);
         handLocal.y *= yReachMultiplier;
 
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool triggerPressed = triggerValue > 0.5f;
 
-        Debug.Log($"[Input] ✋ Adjusted Hand Local: {handLocal}, 🔫 Trigger: {triggerValue:F2} | Pressed: {triggerPressed}");
+        Debug.Log($"[{handLabel}] ✋ Hand Local: {handLocal}, Trigger: {triggerValue:F2}");
 
         ButtonBounds matchedButton = null;
 
@@ -93,15 +105,14 @@ public class ManualButtonHighlighter : MonoBehaviour
             bool inX = dx <= half.x;
             bool inY = dy <= half.y;
 
-            bool isInside = inX && inY;
-            if (isInside && matchedButton == null)
+            if (inX && inY)
             {
                 matchedButton = btn;
-                Debug.Log($"[Match] 🎯 Inside {btn.sceneName} | dx={dx:F1}, dy={dy:F1}");
+                Debug.Log($"[{handLabel}] 🎯 Hovered over {btn.sceneName}");
+                break;
             }
         }
 
-        // Highlighting logic – only one gets highlighted
         foreach (var btn in buttons)
         {
             if (btn.image != null)
@@ -110,13 +121,13 @@ public class ManualButtonHighlighter : MonoBehaviour
 
         if (triggerPressed && matchedButton != null)
         {
-            Debug.Log($"[SceneLoad] ✅ Triggered {matchedButton.sceneName} at handLocal={handLocal}");
+            Debug.Log($"[{handLabel}] ✅ Loading {matchedButton.sceneName}");
             sceneLoading = true;
             SceneManager.LoadScene(matchedButton.sceneName);
         }
         else if (triggerPressed && matchedButton == null)
         {
-            Debug.Log("[SceneLoad] ❌ Trigger pressed but no button matched.");
+            Debug.Log($"[{handLabel}] ❌ Trigger pressed but no button matched.");
         }
     }
 }

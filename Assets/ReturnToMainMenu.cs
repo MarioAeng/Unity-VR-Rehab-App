@@ -4,57 +4,37 @@ using UnityEngine.SceneManagement;
 
 public class ReturnToMainMenu : MonoBehaviour
 {
-    [Header("Input Action")]
-    public InputActionProperty backAction;
-
-    [Header("Scene Name")]
+    public InputActionProperty rightBackAction;
+    public InputActionProperty leftBackAction;
     public string mainMenuSceneName = "MainMenuScene";
 
     void OnEnable()
     {
-        if (backAction.action != null)
+        if (rightBackAction.action != null)
         {
-            backAction.action.Enable();
-            backAction.action.performed += OnBackPressed;
+            rightBackAction.action.Enable();
+            rightBackAction.action.performed += OnBackPressed;
         }
-        else
+
+        if (leftBackAction.action != null)
         {
-            Debug.LogWarning("[ReturnToMainMenu] BackAction is not assigned.");
+            leftBackAction.action.Enable();
+            leftBackAction.action.performed += OnBackPressed;
         }
     }
 
     void OnDisable()
     {
-        if (backAction.action != null)
-        {
-            backAction.action.performed -= OnBackPressed;
-        }
+        if (rightBackAction.action != null)
+            rightBackAction.action.performed -= OnBackPressed;
+
+        if (leftBackAction.action != null)
+            leftBackAction.action.performed -= OnBackPressed;
     }
 
-    void Update()
+    private void OnBackPressed(InputAction.CallbackContext ctx)
     {
-        if (backAction.action != null)
-        {
-            float val = backAction.action.ReadValue<float>();
-            Debug.Log($"[BackAction Raw Value] {val}");
-
-            if (backAction.action.WasPressedThisFrame())
-            {
-                Debug.Log("[ReturnToMainMenu] B Press Detected (WasPressedThisFrame)");
-                LoadMenu();
-            }
-        }
-    }
-
-    void OnBackPressed(InputAction.CallbackContext context)
-    {
-        Debug.Log("[ReturnToMainMenu] B Press Detected (performed callback)");
-        LoadMenu();
-    }
-
-    void LoadMenu()
-    {
-        Debug.Log("[ReturnToMainMenu] Loading main menu scene...");
+        Debug.Log("[ReturnToMainMenu] ⏪ B Press Detected, returning...");
         SceneManager.LoadScene(mainMenuSceneName);
     }
 }
