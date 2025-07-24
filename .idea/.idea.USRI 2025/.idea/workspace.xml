@@ -6,22 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ManualButtonHighlighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PhaseButtonHighlighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PhaseButtonHighlighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InputSystem_Actions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputSystem_Actions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InputSystem_Actions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputSystem_Actions.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ReturnToMainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ReturnToMainMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ReturnToPhaseSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ReturnToPhaseSelection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/PhaseSelectionScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/PhaseSelectionScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HandednessInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HandednessInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/HandednessSelectorScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/HandednessSelectorScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/RayResetter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ReturnToMainMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ReturnToPhaseSelection.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RightButtonHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RuntimeInputAssetAssigner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SelectorHandResetter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SimulatedHandController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -1007,6 +994,39 @@
       <workItem from="1753212767424" duration="75000" />
       <workItem from="1753213185434" duration="89000" />
       <workItem from="1753213724301" duration="42000" />
+      <workItem from="1753273417643" duration="528000" />
+      <workItem from="1753275302873" duration="223000" />
+      <workItem from="1753277114174" duration="108000" />
+      <workItem from="1753279271488" duration="36000" />
+      <workItem from="1753280037087" duration="397000" />
+      <workItem from="1753280772441" duration="43000" />
+      <workItem from="1753281601439" duration="241000" />
+      <workItem from="1753282326649" duration="80000" />
+      <workItem from="1753283612354" duration="182000" />
+      <workItem from="1753284243829" duration="85000" />
+      <workItem from="1753285797780" duration="1246000" />
+      <workItem from="1753287810676" duration="124000" />
+      <workItem from="1753288595059" duration="101000" />
+      <workItem from="1753289504889" duration="281000" />
+      <workItem from="1753289879442" duration="56000" />
+      <workItem from="1753290325902" duration="83000" />
+      <workItem from="1753290647003" duration="76000" />
+      <workItem from="1753291612729" duration="236000" />
+      <workItem from="1753291927174" duration="80000" />
+      <workItem from="1753292792003" duration="105000" />
+      <workItem from="1753293079568" duration="186000" />
+      <workItem from="1753293928052" duration="48000" />
+      <workItem from="1753372615110" duration="226000" />
+      <workItem from="1753373986890" duration="696000" />
+      <workItem from="1753375298577" duration="292000" />
+      <workItem from="1753378604394" duration="167000" />
+      <workItem from="1753379324344" duration="124000" />
+      <workItem from="1753381436821" duration="1148000" />
+      <workItem from="1753383876434" duration="605000" />
+      <workItem from="1753384971569" duration="202000" />
+      <workItem from="1753386196499" duration="224000" />
+      <workItem from="1753386470492" duration="83000" />
+      <workItem from="1753387439224" duration="175000" />
     </task>
     <servers />
   </component>

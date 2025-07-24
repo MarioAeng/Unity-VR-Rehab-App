@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class HandednessInitializer : MonoBehaviour
 {
@@ -36,13 +37,17 @@ public class HandednessInitializer : MonoBehaviour
 
         ResetHandTransforms();
 
-        // Only show both in selector, otherwise respect chosen hand
+        // Activate appropriate hands
         leftSelectorHand.SetActive(showBothHands || isLeft);
         rightSelectorHand.SetActive(showBothHands || !isLeft);
 
-        // Generic controller reinitialization
-        RefreshAllComponents(leftSelectorHand);
-        RefreshAllComponents(rightSelectorHand);
+        // Refresh just the required visuals (ray + line)
+        RefreshVisuals(leftSelectorHand);
+        RefreshVisuals(rightSelectorHand);
+
+        // Also re-enable InputSystem components to fix hand position tracking
+        ReEnableInputActions(leftSelectorHand);
+        ReEnableInputActions(rightSelectorHand);
     }
 
     void ResetHandTransforms()
@@ -62,18 +67,44 @@ public class HandednessInitializer : MonoBehaviour
         }
     }
 
-    void RefreshAllComponents(GameObject hand)
+    void RefreshVisuals(GameObject hand)
     {
         if (hand == null) return;
 
-        var components = hand.GetComponents<Behaviour>();
-        foreach (var comp in components)
+        var rayInteractor = hand.GetComponent<XRRayInteractor>();
+        var lineVisual = hand.GetComponent<XRInteractorLineVisual>();
+
+        if (rayInteractor != null)
+        {
+            rayInteractor.enabled = false;
+            rayInteractor.enabled = true;
+            Debug.Log($"[HandednessInitializer] ♻️ Refreshed XRRayInteractor on {hand.name}");
+        }
+
+        if (lineVisual != null)
+        {
+            lineVisual.enabled = false;
+            lineVisual.enabled = true;
+            Debug.Log($"[HandednessInitializer] ♻️ Refreshed XRInteractorLineVisual on {hand.name}");
+        }
+    }
+
+    void ReEnableInputActions(GameObject hand)
+    {
+        if (hand == null) return;
+
+        var inputBehaviours = hand.GetComponents<MonoBehaviour>();
+        foreach (var comp in inputBehaviours)
         {
             if (comp == null) continue;
 
-            comp.enabled = false;
-            comp.enabled = true;
-            Debug.Log($"[HandednessInitializer] ♻️ Re-enabled component: {comp.GetType().Name} on {hand.name}");
+            var typeName = comp.GetType().Name;
+            if (typeName.Contains("Input") || typeName.Contains("Pose") || typeName.Contains("Simulated"))
+            {
+                comp.enabled = false;
+                comp.enabled = true;
+                Debug.Log($"[HandednessInitializer] ♻️ Re-enabled input-related component: {typeName} on {hand.name}");
+            }
         }
     }
 }
