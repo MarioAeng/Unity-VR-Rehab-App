@@ -14,8 +14,10 @@ public class ElbowRotationTracker : MonoBehaviour
 
     [Header("Input")]
     public string inputAssetName = "InputSystem_Actions";
-    public string positionActionName = "RightHandPosition";
-    public string rotationActionName = "RightHandRotation";
+    public string rightPositionActionName = "RightHandPosition";
+    public string rightRotationActionName = "RightHandRotation";
+    public string leftPositionActionName = "LeftHandPosition";
+    public string leftRotationActionName = "LeftHandRotation";
     public string triggerActionName = "TriggerAction";
     public string resetActionName = "ResetAction";
 
@@ -49,8 +51,15 @@ public class ElbowRotationTracker : MonoBehaviour
             return;
         }
 
-        positionAction = inputActionAsset.FindAction(positionActionName);
-        rotationAction = inputActionAsset.FindAction(rotationActionName);
+        // Determine which hand is selected
+        bool isLeft = PlayerSettings.IsLeftHanded;
+        string posName = isLeft ? leftPositionActionName : rightPositionActionName;
+        string rotName = isLeft ? leftRotationActionName : rightRotationActionName;
+
+        Debug.Log($"[ElbowRotation] Handedness: {(isLeft ? "Left" : "Right")} | Position: {posName} | Rotation: {rotName}");
+
+        positionAction = inputActionAsset.FindAction(posName);
+        rotationAction = inputActionAsset.FindAction(rotName);
         triggerAction = inputActionAsset.FindAction(triggerActionName);
         resetAction = inputActionAsset.FindAction(resetActionName);
 
@@ -74,7 +83,7 @@ public class ElbowRotationTracker : MonoBehaviour
         if (positionAction == null || triggerAction == null || rotationAction == null)
             return;
 
-        // Read hand position and apply offset and rotation
+        // Read hand position and apply offset
         Vector3 rawPos = positionAction.ReadValue<Vector3>();
         Quaternion handRot = rotationAction.ReadValue<Quaternion>();
         Vector3 handPos = rawPos + offset;

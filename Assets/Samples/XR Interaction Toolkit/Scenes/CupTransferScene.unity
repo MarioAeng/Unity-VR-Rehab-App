@@ -1409,19 +1409,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasTransform: {fileID: 184151134}
-  handTransform: {fileID: 1962846429}
-  triggerAction:
-    m_UseReference: 1
+  leftHandTransform: {fileID: 0}
+  rightHandTransform: {fileID: 0}
+  leftTriggerAction:
+    m_UseReference: 0
     m_Action:
-      m_Name: Trigger
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: fe1c78ad-8c5e-4268-8f11-a1bb393b7895
+      m_Id: 21f57ff3-56c4-4bda-b274-9eca4572201f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    m_Reference: {fileID: 0}
+  rightTriggerAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5d474128-f626-4ecc-9ee9-784aec9204d3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   yReachMultiplier: 2
@@ -1939,18 +1952,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0669414b09d9a0a4bb56ed6e841905c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backAction:
+  rightBackAction:
     m_UseReference: 1
     m_Action:
-      m_Name: Back
+      m_Name: Right Back
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 8326f0b1-9995-4113-a761-c0933d750530
+      m_Id: b1cb28e3-6889-4792-b1d7-de3d50bb52b2
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 6952090903196875490, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftBackAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Back
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f09ef313-1e94-4e9c-bf5a-c17409fc696f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1491805146923616011, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   mainMenuSceneName: MainMenuScene
 --- !u!4 &1108646821
 Transform:
