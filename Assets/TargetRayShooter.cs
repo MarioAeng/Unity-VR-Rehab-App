@@ -1,38 +1,79 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class TargetRayShooter : MonoBehaviour
 {
-    public InputActionProperty triggerAction;
+    [Header("References")]
+    public LineRenderer lineRenderer;
+    public GameObject spawnerObject;
     public LayerMask targetLayer;
-    public float rayDistance = 10f;
-    public TargetSpawner spawner;
+    public float maxDistance = 10f;
 
+    [Header("Input")]
+    public InputActionAsset inputActionAsset;
+    public string rightTriggerActionName = "RightTriggerAction";
+    public string leftTriggerActionName = "LeftTriggerAction";
+
+    private InputAction triggerAction;
+    private bool isLeftHanded = false;
+    private TargetSpawner spawner;
     private bool wasPressedLastFrame = false;
+
+    void Start()
+    {
+        isLeftHanded = PlayerSettings.IsLeftHanded;
+        spawner = spawnerObject?.GetComponent<TargetSpawner>();
+
+        if (spawner == null)
+        {
+            Debug.LogError("[TargetRayShooter] Missing TargetSpawner reference.");
+        }
+
+        string actionName = isLeftHanded ? leftTriggerActionName : rightTriggerActionName;
+        triggerAction = inputActionAsset?.FindAction(actionName);
+
+        if (triggerAction == null)
+        {
+            Debug.LogError($"[TargetRayShooter] Could not find action: {actionName}");
+        }
+        else
+        {
+            triggerAction.Enable();
+            Debug.Log($"[TargetRayShooter] Using {(isLeftHanded ? "Left" : "Right")} trigger: {actionName}");
+        }
+    }
 
     void Update()
     {
-        if (triggerAction.action == null || spawner == null)
-            return;
+        if (triggerAction == null || spawner == null) return;
 
-        float value = triggerAction.action.ReadValue<float>();
-        bool isPressed = value > 0.5f;
+        Vector3 rayStart = transform.position;
+        Vector3 rayDirection = transform.forward;
+
+        Ray ray = new Ray(rayStart, rayDirection);
+        lineRenderer.SetPosition(0, rayStart);
+        lineRenderer.SetPosition(1, rayStart + rayDirection * maxDistance);
+
+        bool isPressed = triggerAction.ReadValue<float>() > 0.5f;
 
         if (isPressed && !wasPressedLastFrame)
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, targetLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, targetLayer))
             {
                 if (hit.collider.CompareTag("TargetCube"))
                 {
-                    Debug.Log("[Shooter] Hit target cube!");
+                    Debug.Log("[TargetRayShooter] Cube hit, destroying...");
                     Destroy(hit.collider.gameObject);
-                    spawner.RegisterHit();
+                    spawner.OnTargetHit(); // Use OnTargetHit(), not RegisterHit
                 }
             }
         }
 
         wasPressedLastFrame = isPressed;
+    }
+
+    void OnDisable()
+    {
+        triggerAction?.Disable();
     }
 }

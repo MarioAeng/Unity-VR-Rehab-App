@@ -18,7 +18,8 @@ public class ElbowRotationTracker : MonoBehaviour
     public string rightRotationActionName = "RightHandRotation";
     public string leftPositionActionName = "LeftHandPosition";
     public string leftRotationActionName = "LeftHandRotation";
-    public string triggerActionName = "TriggerAction";
+    public string rightTriggerActionName = "RightTriggerAction";
+    public string leftTriggerActionName = "LeftTriggerAction";
     public string resetActionName = "ResetAction";
 
     private InputActionAsset inputActionAsset;
@@ -51,16 +52,17 @@ public class ElbowRotationTracker : MonoBehaviour
             return;
         }
 
-        // Determine which hand is selected
         bool isLeft = PlayerSettings.IsLeftHanded;
+
         string posName = isLeft ? leftPositionActionName : rightPositionActionName;
         string rotName = isLeft ? leftRotationActionName : rightRotationActionName;
+        string trigName = isLeft ? leftTriggerActionName : rightTriggerActionName;
 
-        Debug.Log($"[ElbowRotation] Handedness: {(isLeft ? "Left" : "Right")} | Position: {posName} | Rotation: {rotName}");
+        Debug.Log($"[ElbowRotation] Handedness: {(isLeft ? "Left" : "Right")} | Pos: {posName} | Rot: {rotName} | Trigger: {trigName}");
 
         positionAction = inputActionAsset.FindAction(posName);
         rotationAction = inputActionAsset.FindAction(rotName);
-        triggerAction = inputActionAsset.FindAction(triggerActionName);
+        triggerAction = inputActionAsset.FindAction(trigName);
         resetAction = inputActionAsset.FindAction(resetActionName);
 
         inputActionAsset.Enable();
@@ -83,7 +85,6 @@ public class ElbowRotationTracker : MonoBehaviour
         if (positionAction == null || triggerAction == null || rotationAction == null)
             return;
 
-        // Read hand position and apply offset
         Vector3 rawPos = positionAction.ReadValue<Vector3>();
         Quaternion handRot = rotationAction.ReadValue<Quaternion>();
         Vector3 handPos = rawPos + offset;
@@ -92,7 +93,6 @@ public class ElbowRotationTracker : MonoBehaviour
         float x = handPos.x;
         bool triggerPressed = triggerAction.ReadValue<float>() > 0.5f;
 
-        // Reset logic
         if (resetAction != null && resetAction.triggered)
         {
             repCount = 0;
@@ -107,7 +107,6 @@ public class ElbowRotationTracker : MonoBehaviour
             return;
         }
 
-        // Calibration logic
         if (!rightCalibrated)
         {
             trainerPrompt.text = "Move hand FAR RIGHT and press trigger to calibrate.";
@@ -136,7 +135,6 @@ public class ElbowRotationTracker : MonoBehaviour
             return;
         }
 
-        // Active rep logic (after calibration)
         if (lastSide == Side.Right)
         {
             float distToLeft = Mathf.Abs(x - calibratedLeftX);
@@ -161,7 +159,7 @@ public class ElbowRotationTracker : MonoBehaviour
                 isHolding = false;
             }
         }
-        else // lastSide == Side.Left
+        else
         {
             float distToRight = Mathf.Abs(x - calibratedRightX);
             if (distToRight <= positionThreshold)
@@ -186,7 +184,6 @@ public class ElbowRotationTracker : MonoBehaviour
             }
         }
 
-        // Update trigger state for edge detection
         wasTriggerPressed = triggerPressed;
     }
 }

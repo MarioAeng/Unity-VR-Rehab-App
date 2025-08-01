@@ -1371,16 +1371,11 @@ GameObject:
   - component: {fileID: 863868548}
   - component: {fileID: 863868547}
   - component: {fileID: 863868546}
-  - component: {fileID: 863868545}
   - component: {fileID: 863868544}
-  - component: {fileID: 863868543}
   - component: {fileID: 863868542}
-  - component: {fileID: 863868541}
-  - component: {fileID: 863868540}
-  - component: {fileID: 863868539}
-  - component: {fileID: 863868538}
   - component: {fileID: 863868537}
   - component: {fileID: 863868555}
+  - component: {fileID: 863868556}
   m_Layer: 5
   m_Name: MainSelectorHand
   m_TagString: Player
@@ -1400,110 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ab71d7620edf9458ae33a5eef5977b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &863868538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c84b7c24dd5177347bec96940a554441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayInteractor: {fileID: 863868548}
-  rayVisual: {fileID: 863868547}
-  handVisual: {fileID: 563576782}
-  triggerAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: af59c01c-3955-46e2-a3e1-99fdeaa1a514
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  rayLength: 10
-  fallbackMaterial: {fileID: 2100000, guid: b384e4375d22bd74a8bd6bbfe96b967a, type: 2}
-  handOffset: {x: 0, y: 0, z: 0.3}
---- !u!114 &863868539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014f50042fdfe14abe0d1ce57ac811c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayInteractor: {fileID: 863868548}
-  rayVisual: {fileID: 863868547}
-  fallbackMaterial: {fileID: 2100000, guid: b384e4375d22bd74a8bd6bbfe96b967a, type: 2}
-  fixedRayLength: 10
-  localOffset: {x: 0, y: 0, z: 0.3}
---- !u!114 &863868540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145a7a3c6511e9441909a7d0202d384d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 58225824-37fd-4121-b0fb-a89ee4224cfb
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  rayOrigin: {fileID: 863868554}
-  rayDistance: 10
-  uiLayer:
-    serializedVersion: 2
-    m_Bits: 32
---- !u!114 &863868541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98bb90ea556ada3448eb8cb5405ef41b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayInteractor: {fileID: 863868548}
-  rayVisual: {fileID: 863868547}
-  triggerAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 1fa28968-bbbe-4285-85a0-0dd15f39dec0
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  mainSelectorHand: {fileID: 863868536}
-  handVisual: {fileID: 563576782}
 --- !u!114 &863868542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,21 +1408,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayInteractor: {fileID: 863868548}
---- !u!114 &863868543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85b3ce2ae80de24c807bd8c25955b14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayInteractor: {fileID: 863868548}
-  rayVisual: {fileID: 863868547}
-  handVisual: {fileID: 563576782}
 --- !u!114 &863868544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,7 +1426,7 @@ MonoBehaviour:
   leftTriggerAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Left Trigger
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 2332c5e8-b019-4552-9be8-e396144917f0
@@ -1562,7 +1438,7 @@ MonoBehaviour:
   rightTriggerAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Right Trigger
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 186b27cb-74ab-4866-b0e4-7692bae08735
@@ -1574,37 +1450,6 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   yReachMultiplier: 2
---- !u!114 &863868545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863868536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cf2197a04829140937f081bf61b862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 2313624e-53f4-47e0-830c-ba387be305cb
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  targets:
-  - sceneName: ArmRaiseScene
-    position: {x: 0, y: 0, z: 0}
-    activationRadius: 1.7
-  - sceneName: ArmRotationScene
-    position: {x: 0, y: 0, z: 0}
-    activationRadius: 1.7
 --- !u!114 &863868546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2314,23 +2159,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca26cfbd72cb89c40affced88052d15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerAction:
+  lineRenderer: {fileID: 863868551}
+  spawnerObject: {fileID: 229910423}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  maxDistance: 10
+  inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightTriggerActionName: TriggerAction
+  leftTriggerActionName: LeftTriggerAction
+--- !u!114 &863868556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863868536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddbffae3152eba418a1aa256d4c6ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandPositionAction:
     m_UseReference: 1
     m_Action:
-      m_Name: Trigger
+      m_Name: Left Hand Position
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 7e7fbc2d-f88b-477e-8a61-981b3e9466b1
+      m_Id: 8f94a453-81b6-4c80-b60e-0a584f429212
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -6229915201946342542, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  rayDistance: 10
-  spawner: {fileID: 229910424}
+    m_Reference: {fileID: -4875158904869680739, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftHandRotationAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: af2925df-51e5-4bd4-a99c-0c4da2b19c02
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 4768758363110269751, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightHandPositionAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ed52e207-0929-49ba-8f54-80883f36666f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5687240200183040051, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightHandRotationAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b6ec876b-5c58-489c-9725-2669e668fb9e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6318320301507297905, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftHandTransform: {fileID: 1667091544}
+  rightHandTransform: {fileID: 863868554}
 --- !u!1 &976596073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,9 +2260,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightBackAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Right Back
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 9cff6411-0178-41f4-b072-62af42cd9636
@@ -2371,11 +2270,11 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 6952090903196875490, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   leftBackAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Left Back
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: e11948c1-0be1-440a-86dd-579c93f6bbd9
@@ -2383,7 +2282,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -1491805146923616011, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   mainMenuSceneName: MainMenuScene
 --- !u!4 &976596075
 Transform:
@@ -2586,6 +2485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandednessController
       objectReference: {fileID: 0}
+    - target: {fileID: 5116680833027822862, guid: b2e05096e8f7347488e36fdc0d076eb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6323717730799022102, guid: b2e05096e8f7347488e36fdc0d076eb5, type: 3}
       propertyPath: leftSelectorHand
       value: 
@@ -2597,8 +2500,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5116680833027822862, guid: b2e05096e8f7347488e36fdc0d076eb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1382912733}
   m_SourcePrefab: {fileID: 100100000, guid: b2e05096e8f7347488e36fdc0d076eb5, type: 3}
+--- !u!1 &1382912732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5116680833027822862, guid: b2e05096e8f7347488e36fdc0d076eb5, type: 3}
+  m_PrefabInstance: {fileID: 1382912731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1382912733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382912732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95581d3e39bbe53488755e574c0e536d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftSelectorHand: {fileID: 1667091529}
+  rightSelectorHand: {fileID: 863868536}
 --- !u!114 &1382912734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3050,16 +2975,124 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftSelectorHand
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8601237543906914847, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 72368250352990477, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+    - {fileID: 3084133786777557418, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+    - {fileID: 2649913381876882005, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+    - {fileID: 2348465320958706103, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+    - {fileID: 7655708020705451390, guid: c77227241122fea4cabdf6038a46548b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8601237543906914847, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1667091530}
+    - targetCorrespondingSourceObject: {fileID: 8601237543906914847, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1667091558}
   m_SourcePrefab: {fileID: 100100000, guid: c77227241122fea4cabdf6038a46548b, type: 3}
 --- !u!1 &1667091529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8601237543906914847, guid: c77227241122fea4cabdf6038a46548b, type: 3}
   m_PrefabInstance: {fileID: 1667091528}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1667091530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667091529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca26cfbd72cb89c40affced88052d15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 1667091531}
+  spawnerObject: {fileID: 229910423}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  maxDistance: 10
+  inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightTriggerActionName: TriggerAction
+  leftTriggerActionName: LeftTriggerAction
+--- !u!120 &1667091531 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 8612517533403163633, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+  m_PrefabInstance: {fileID: 1667091528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1667091544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7095822829168655004, guid: c77227241122fea4cabdf6038a46548b, type: 3}
+  m_PrefabInstance: {fileID: 1667091528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1667091558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667091529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddbffae3152eba418a1aa256d4c6ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandPositionAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b83c51e7-95ef-4736-bc33-242df7537232
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4875158904869680739, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftHandRotationAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 29b68060-3a02-4990-8a2c-9aeae3a43662
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 4768758363110269751, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightHandPositionAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 465e6c29-1dc9-4eeb-956f-2f7f8bc6d31a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5687240200183040051, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rightHandRotationAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 01dca484-cf9c-493f-a561-f0c1ffe7df59
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6318320301507297905, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftHandTransform: {fileID: 1667091544}
+  rightHandTransform: {fileID: 863868554}
 --- !u!1 &2136992506
 GameObject:
   m_ObjectHideFlags: 0

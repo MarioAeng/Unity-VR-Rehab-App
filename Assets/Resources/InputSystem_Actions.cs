@@ -1186,7 +1186,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""208647f4-cf01-45c7-8863-f92ac56ffbb9"",
-                    ""path"": ""<QuestProTouchController>{RightHand}/grip"",
+                    ""path"": ""<XRController>{RightHand}/grip"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

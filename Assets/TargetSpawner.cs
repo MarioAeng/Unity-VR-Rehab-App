@@ -14,7 +14,7 @@ public class TargetSpawner : MonoBehaviour
     [Header("Spawn Settings")]
     public float verticalMin = -0.25f;
     public float verticalMax = 0.25f;
-    public float horizontalMin = -0.3f;  // max safe range
+    public float horizontalMin = -0.3f;
     public float horizontalMax = 0.3f;
     public float forwardOffset = 2f;
 
@@ -70,9 +70,10 @@ public class TargetSpawner : MonoBehaviour
         }
     }
 
-    public void RegisterHit()
+    // ✅ This is the method called via SendMessage from the ray shooter
+    public void OnTargetHit()
     {
-        Debug.Log("[TargetSpawner] Registering hit");
+        Debug.Log("[TargetSpawner] Registering hit via OnTargetHit()");
         hitsThisLevel++;
         repsThisLevel++;
         UpdateUI();
