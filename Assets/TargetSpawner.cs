@@ -23,6 +23,9 @@ public class TargetSpawner : MonoBehaviour
     public float minJumpDistanceX = 0.25f;
     public float minJumpDistanceY = 0.12f;
 
+    [Header("Layer Settings")]
+    public int targetLayerIndex = 6;  // Default to layer 6; adjust as needed
+
     private int repsThisLevel = 0;
     private int hitsThisLevel = 0;
     private int level = 1;
@@ -70,7 +73,6 @@ public class TargetSpawner : MonoBehaviour
         }
     }
 
-    // ✅ This is the method called via SendMessage from the ray shooter
     public void OnTargetHit()
     {
         Debug.Log("[TargetSpawner] Registering hit via OnTargetHit()");
@@ -157,8 +159,14 @@ public class TargetSpawner : MonoBehaviour
         Vector3 offset = new Vector3(xOffset, yOffset, forwardOffset);
         Vector3 spawnPosition = handOrigin.position + handOrigin.TransformDirection(offset);
 
-        currentTarget = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
+        // ✅ Rotation fix to make the ring face upright
+        Quaternion lookRotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        Quaternion correction = Quaternion.Euler(90f, 0f, 0f);
+        Quaternion finalRotation = lookRotation * correction;
+
+        currentTarget = Instantiate(targetPrefab, spawnPosition, finalRotation);
         currentTarget.tag = "TargetCube";
+        currentTarget.layer = targetLayerIndex; // ✅ Assign correct layer for raycasting
 
         float baseScale = 0.2f;
         float minScale = 0.06f;

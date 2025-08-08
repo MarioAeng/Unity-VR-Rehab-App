@@ -4,25 +4,25 @@ using TMPro;
 
 public class ElbowRotationTracker : MonoBehaviour
 {
-    [Header("UI")]
+    [Header("Setup")]
     public TMP_Text trainerPrompt;
     public TMP_Text repCounterText;
 
     [Header("Rep Settings")]
-    public float positionThreshold = 0.05f;
-    public float requiredHoldTime = 1.2f;
+    public float positionThreshold = 0.15f;
+    public float requiredHoldTime = 1.0f;
+
+    [Header("Target Positions (X axis)")]
+    public float targetLeftX;
+    public float targetRightX;
 
     [Header("Input")]
-    public string inputAssetName = "InputSystem_Actions";
-    public string rightPositionActionName = "RightHandPosition";
-    public string rightRotationActionName = "RightHandRotation";
-    public string leftPositionActionName = "LeftHandPosition";
-    public string leftRotationActionName = "LeftHandRotation";
-    public string rightTriggerActionName = "RightTriggerAction";
-    public string leftTriggerActionName = "LeftTriggerAction";
+    public InputActionAsset inputActionAsset;
+    public string positionActionName = "RightHandPosition";
+    public string rotationActionName = "RightHandRotation";
+    public string triggerActionName = "TriggerAction";
     public string resetActionName = "ResetAction";
 
-    private InputActionAsset inputActionAsset;
     private InputAction positionAction;
     private InputAction rotationAction;
     private InputAction triggerAction;
@@ -32,158 +32,145 @@ public class ElbowRotationTracker : MonoBehaviour
     private float holdTimer = 0f;
     private bool isHolding = false;
     private bool wasTriggerPressed = false;
-
-    private enum Side { Left, Right }
-    private Side lastSide = Side.Right;
-
-    private float calibratedLeftX;
-    private float calibratedRightX;
-    private bool rightCalibrated = false;
-    private bool leftCalibrated = false;
+    private enum Side { Right, Left }
+    private Side currentSide = Side.Right;
 
     private Vector3 offset = new Vector3(0f, -0.4f, 0.3f);
 
-    void OnEnable()
+    private enum CalibrationStage { None, RightSet, BothSet }
+    private CalibrationStage calibrationStage = CalibrationStage.None;
+
+    private void OnEnable()
     {
-        inputActionAsset = Resources.Load<InputActionAsset>(inputAssetName);
-        if (inputActionAsset == null)
-        {
-            Debug.LogError("[ElbowRotation] InputActionAsset not found.");
-            return;
-        }
+        var map = inputActionAsset.FindActionMap("SimulatedHandMap");
 
-        bool isLeft = PlayerSettings.IsLeftHanded;
+        positionAction = map.FindAction(positionActionName);
+        rotationAction = map.FindAction(rotationActionName);
+        triggerAction = map.FindAction(triggerActionName);
+        resetAction = map.FindAction(resetActionName);
 
-        string posName = isLeft ? leftPositionActionName : rightPositionActionName;
-        string rotName = isLeft ? leftRotationActionName : rightRotationActionName;
-        string trigName = isLeft ? leftTriggerActionName : rightTriggerActionName;
-
-        Debug.Log($"[ElbowRotation] Handedness: {(isLeft ? "Left" : "Right")} | Pos: {posName} | Rot: {rotName} | Trigger: {trigName}");
-
-        positionAction = inputActionAsset.FindAction(posName);
-        rotationAction = inputActionAsset.FindAction(rotName);
-        triggerAction = inputActionAsset.FindAction(trigName);
-        resetAction = inputActionAsset.FindAction(resetActionName);
-
-        inputActionAsset.Enable();
         positionAction?.Enable();
         rotationAction?.Enable();
         triggerAction?.Enable();
         resetAction?.Enable();
-
-        trainerPrompt.text = "Move hand FAR RIGHT and press trigger to calibrate.";
-        repCounterText.text = "Reps: 0";
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        inputActionAsset?.Disable();
+        positionAction?.Disable();
+        rotationAction?.Disable();
+        triggerAction?.Disable();
+        resetAction?.Disable();
     }
 
     void Update()
     {
-        if (positionAction == null || triggerAction == null || rotationAction == null)
+        if (positionAction == null || rotationAction == null)
+        {
+            Debug.LogWarning("[ElbowRotation] ❌ Missing Input Actions.");
             return;
+        }
 
         Vector3 rawPos = positionAction.ReadValue<Vector3>();
-        Quaternion handRot = rotationAction.ReadValue<Quaternion>();
+        Quaternion rot = rotationAction.ReadValue<Quaternion>();
         Vector3 handPos = rawPos + offset;
-        transform.SetPositionAndRotation(handPos, handRot);
+        transform.SetPositionAndRotation(handPos, rot);
 
         float x = handPos.x;
         bool triggerPressed = triggerAction.ReadValue<float>() > 0.5f;
 
+        // Reset
         if (resetAction != null && resetAction.triggered)
         {
+            calibrationStage = CalibrationStage.None;
             repCount = 0;
-            holdTimer = 0f;
-            isHolding = false;
-            lastSide = Side.Right;
-            leftCalibrated = false;
-            rightCalibrated = false;
+            currentSide = Side.Right;
             repCounterText.text = "Reps: 0";
-            trainerPrompt.text = "Reset. Move hand FAR RIGHT and press trigger.";
-            Debug.Log("[ElbowRotation] 🔁 Reset.");
+            trainerPrompt.text = "🔁 Reset. Move hand to far RIGHT and press trigger.";
             return;
         }
 
-        if (!rightCalibrated)
+        // Calibration logic
+        if (calibrationStage == CalibrationStage.None)
         {
-            trainerPrompt.text = "Move hand FAR RIGHT and press trigger to calibrate.";
+            trainerPrompt.text = "Move hand to far RIGHT and press trigger.";
             if (triggerPressed && !wasTriggerPressed)
             {
-                calibratedRightX = x;
-                rightCalibrated = true;
-                trainerPrompt.text = "Now move FAR LEFT and press trigger.";
-                Debug.Log($"[ElbowRotation] ✅ Calibrated RIGHT X: {calibratedRightX}");
+                targetRightX = x;
+                calibrationStage = CalibrationStage.RightSet;
+                trainerPrompt.text = "✅ Right side set. Now move hand to far LEFT and press trigger.";
+                Debug.Log($"[ElbowRotation] ✅ RightX: {targetRightX}");
+            }
+            wasTriggerPressed = triggerPressed;
+            return;
+        }
+        else if (calibrationStage == CalibrationStage.RightSet)
+        {
+            trainerPrompt.text = "Move hand to far LEFT and press trigger.";
+            if (triggerPressed && !wasTriggerPressed)
+            {
+                targetLeftX = x;
+                calibrationStage = CalibrationStage.BothSet;
+                trainerPrompt.text = "✅ Calibration complete. Start moving LEFT and RIGHT.";
+                Debug.Log($"[ElbowRotation] ✅ LeftX: {targetLeftX}");
             }
             wasTriggerPressed = triggerPressed;
             return;
         }
 
-        if (!leftCalibrated)
+        // Rep logic (BothSet)
+        if (calibrationStage == CalibrationStage.BothSet)
         {
-            trainerPrompt.text = "Move hand FAR LEFT and press trigger to calibrate.";
-            if (triggerPressed && !wasTriggerPressed)
+            if (currentSide == Side.Right)
             {
-                calibratedLeftX = x;
-                leftCalibrated = true;
-                trainerPrompt.text = "Calibration complete! Begin rotating.";
-                Debug.Log($"[ElbowRotation] ✅ Calibrated LEFT X: {calibratedLeftX}");
+                float distToLeft = Mathf.Abs(x - targetLeftX);
+                if (distToLeft <= positionThreshold)
+                {
+                    trainerPrompt.text = "Hold on LEFT!";
+                    holdTimer += Time.deltaTime;
+
+                    if (!isHolding && holdTimer >= requiredHoldTime)
+                    {
+                        isHolding = true;
+                        currentSide = Side.Left;
+                        repCount++;
+                        repCounterText.text = $"Reps: {repCount}";
+                        Debug.Log($"[ElbowRotation] ✅ Rep {repCount} (Left)");
+                    }
+                }
+                else
+                {
+                    trainerPrompt.text = "Move further LEFT.";
+                    holdTimer = 0f;
+                    isHolding = false;
+                }
             }
+            else // currentSide == Side.Left
+            {
+                float distToRight = Mathf.Abs(x - targetRightX);
+                if (distToRight <= positionThreshold)
+                {
+                    trainerPrompt.text = "Hold on RIGHT!";
+                    holdTimer += Time.deltaTime;
+
+                    if (!isHolding && holdTimer >= requiredHoldTime)
+                    {
+                        isHolding = true;
+                        currentSide = Side.Right;
+                        repCount++;
+                        repCounterText.text = $"Reps: {repCount}";
+                        Debug.Log($"[ElbowRotation] ✅ Rep {repCount} (Right)");
+                    }
+                }
+                else
+                {
+                    trainerPrompt.text = "Move further RIGHT.";
+                    holdTimer = 0f;
+                    isHolding = false;
+                }
+            }
+
             wasTriggerPressed = triggerPressed;
-            return;
         }
-
-        if (lastSide == Side.Right)
-        {
-            float distToLeft = Mathf.Abs(x - calibratedLeftX);
-            if (distToLeft <= positionThreshold)
-            {
-                trainerPrompt.text = "Hold on LEFT!";
-                holdTimer += Time.deltaTime;
-
-                if (!isHolding && holdTimer >= requiredHoldTime)
-                {
-                    isHolding = true;
-                    lastSide = Side.Left;
-                    repCount++;
-                    repCounterText.text = $"Reps: {repCount}";
-                    Debug.Log($"[ElbowRotation] ✅ Rep {repCount} (Left)");
-                }
-            }
-            else
-            {
-                trainerPrompt.text = "Move further LEFT.";
-                holdTimer = 0f;
-                isHolding = false;
-            }
-        }
-        else
-        {
-            float distToRight = Mathf.Abs(x - calibratedRightX);
-            if (distToRight <= positionThreshold)
-            {
-                trainerPrompt.text = "Hold on RIGHT!";
-                holdTimer += Time.deltaTime;
-
-                if (!isHolding && holdTimer >= requiredHoldTime)
-                {
-                    isHolding = true;
-                    lastSide = Side.Right;
-                    repCount++;
-                    repCounterText.text = $"Reps: {repCount}";
-                    Debug.Log($"[ElbowRotation] ✅ Rep {repCount} (Right)");
-                }
-            }
-            else
-            {
-                trainerPrompt.text = "Move further RIGHT.";
-                holdTimer = 0f;
-                isHolding = false;
-            }
-        }
-
-        wasTriggerPressed = triggerPressed;
     }
 }
