@@ -3,12 +3,26 @@ using UnityEngine.InputSystem;
 
 public class TrainerArmTwister : MonoBehaviour
 {
-    [Header("References")]
-    public Transform trainerArm;                 // The upper arm or forearm to twist
-    public Transform shoulderJoint;              // Rotates to simulate raising the arm
-    public InputActionProperty controllerPositionAction;
-    public InputActionProperty controllerRotationAction;
+    public enum HandMode { Right, Left, Auto }
+    [Header("Mode")]
+    public HandMode mode = HandMode.Auto;
+    [Range(0f, 1f)] public float autoSwitchThreshold = 0.05f; // for Auto hand pick
 
+    // ---------- RIGHT (your original fields) ----------
+    [Header("References - RIGHT (original)")]
+    public Transform trainerArm;                 // RIGHT forearm/upper arm to twist
+    public Transform shoulderJoint;              // RIGHT shoulder to raise
+    public InputActionProperty controllerPositionAction; // RIGHT position
+    public InputActionProperty controllerRotationAction; // RIGHT rotation
+
+    // ---------- LEFT (new) ----------
+    [Header("References - LEFT")]
+    public Transform leftTrainerArm;             // LEFT forearm/upper arm to twist
+    public Transform leftShoulderJoint;          // LEFT shoulder to raise
+    public InputActionProperty leftControllerPositionAction;  // LEFT position
+    public InputActionProperty leftControllerRotationAction;  // LEFT rotation
+
+    // ---------- Shared Raise/Twist Settings (UNCHANGED math) ----------
     [Header("Raise Settings")]
     public float minRaiseAngle = 0f;
     public float maxRaiseAngle = 75f;
@@ -18,40 +32,126 @@ public class TrainerArmTwister : MonoBehaviour
     [Header("Twist Settings")]
     public float minTwistAngle = -45f;
     public float maxTwistAngle = 45f;
-    public float minZRotation = -0.6f;  // From wrist rotation
+    public float minZRotation = -0.6f;  // From wrist rotation (zDeg/90)
     public float maxZRotation = 0.6f;
+
+    // ---------- Base offsets to keep arms near the sides ----------
+    [Header("Base Shoulder Offsets (degrees)")]
+    public float rightShoulderBaseAngle = -90f; // put 0 if your rig already rests at sides
+    public float leftShoulderBaseAngle  = -90f; // typically same as right
+
+    private HandMode _active;
+
+    void OnEnable()
+    {
+        controllerPositionAction.action?.Enable();
+        controllerRotationAction.action?.Enable();
+        leftControllerPositionAction.action?.Enable();
+        leftControllerRotationAction.action?.Enable();
+
+        _active = (mode == HandMode.Auto) ? HandMode.Right : mode;
+    }
+
+    void OnDisable()
+    {
+        controllerPositionAction.action?.Disable();
+        controllerRotationAction.action?.Disable();
+        leftControllerPositionAction.action?.Disable();
+        leftControllerRotationAction.action?.Disable();
+    }
 
     void LateUpdate()
     {
-        if (controllerPositionAction == null || controllerRotationAction == null ||
-            trainerArm == null || shoulderJoint == null)
+        // Decide active hand (anatomical)
+        if (mode == HandMode.Auto)
         {
-            Debug.LogWarning("[TrainerArmTwister] ❌ Missing references!");
+            float rNorm = (controllerPositionAction.action != null)
+                ? NormalizeY(controllerPositionAction.action.ReadValue<Vector3>().y) : 0f;
+            float lNorm = (leftControllerPositionAction.action != null)
+                ? NormalizeY(leftControllerPositionAction.action.ReadValue<Vector3>().y) : 0f;
+
+            float diff = rNorm - lNorm; // >0 -> right higher
+            if (_active == HandMode.Right && diff < -autoSwitchThreshold) _active = HandMode.Left;
+            else if (_active == HandMode.Left && diff >  autoSwitchThreshold) _active = HandMode.Right;
+        }
+        else _active = mode;
+
+        if (_active == HandMode.Right)
+        {
+            DriveRight();                                  // move RIGHT
+            Park(leftShoulderJoint, leftTrainerArm, leftShoulderBaseAngle); // park LEFT
+        }
+        else
+        {
+            DriveLeft();                                   // move LEFT
+            Park(shoulderJoint, trainerArm, rightShoulderBaseAngle);        // park RIGHT
+        }
+    }
+
+    // ---------- RIGHT: original logic, plus base shoulder offset ----------
+    void DriveRight()
+    {
+        if (controllerPositionAction == null || controllerRotationAction == null ||
+            trainerArm == null || shoulderJoint == null ||
+            controllerPositionAction.action == null || controllerRotationAction.action == null)
+        {
+            Debug.LogWarning("[TrainerArmTwister] ❌ Missing RIGHT references!");
             return;
         }
 
-        // ✅ Get controller Y position to determine raise angle
         Vector3 controllerPos = controllerPositionAction.action.ReadValue<Vector3>();
-        float controllerY = controllerPos.y;
-        float clampedY = Mathf.Clamp(controllerY, minY, maxY);
+        float clampedY = Mathf.Clamp(controllerPos.y, minY, maxY);
         float normalizedY = Mathf.InverseLerp(minY, maxY, clampedY);
         float raiseAngle = Mathf.Lerp(minRaiseAngle, maxRaiseAngle, normalizedY);
 
-        // ✅ Apply raise to shoulder joint (rotate around Z)
-        shoulderJoint.localRotation = Quaternion.Euler(0f, 0f, raiseAngle);
+        shoulderJoint.localRotation = Quaternion.Euler(0f, 0f, rightShoulderBaseAngle + raiseAngle);
 
-        // ✅ Get controller Z rotation to determine twist angle
         Quaternion controllerRot = controllerRotationAction.action.ReadValue<Quaternion>();
-        float zRot = controllerRot.eulerAngles.z;
-        if (zRot > 180f) zRot -= 360f;
-
+        float zRot = controllerRot.eulerAngles.z; if (zRot > 180f) zRot -= 360f;
         float clampedZ = Mathf.Clamp(zRot / 90f, minZRotation, maxZRotation);
         float normalizedZ = Mathf.InverseLerp(minZRotation, maxZRotation, clampedZ);
         float twistAngle = Mathf.Lerp(minTwistAngle, maxTwistAngle, normalizedZ);
 
-        // ✅ Apply twist to trainer arm (rotate around Y)
         trainerArm.localRotation = Quaternion.Euler(0f, twistAngle, 0f);
+    }
 
-        Debug.Log($"[TrainerArmTwister] Raise: {raiseAngle:F1}°  |  Twist: {twistAngle:F1}°  |  ZRot: {zRot:F1}°");
+    // ---------- LEFT: exact same math on left references, with base offset ----------
+    void DriveLeft()
+    {
+        if (leftControllerPositionAction == null || leftControllerRotationAction == null ||
+            leftTrainerArm == null || leftShoulderJoint == null ||
+            leftControllerPositionAction.action == null || leftControllerRotationAction.action == null)
+        {
+            Debug.LogWarning("[TrainerArmTwister] ❌ Missing LEFT references!");
+            return;
+        }
+
+        Vector3 controllerPos = leftControllerPositionAction.action.ReadValue<Vector3>();
+        float clampedY = Mathf.Clamp(controllerPos.y, minY, maxY);
+        float normalizedY = Mathf.InverseLerp(minY, maxY, clampedY);
+        float raiseAngle = Mathf.Lerp(minRaiseAngle, maxRaiseAngle, normalizedY);
+
+        leftShoulderJoint.localRotation = Quaternion.Euler(0f, 0f, leftShoulderBaseAngle + raiseAngle);
+
+        Quaternion controllerRot = leftControllerRotationAction.action.ReadValue<Quaternion>();
+        float zRot = controllerRot.eulerAngles.z; if (zRot > 180f) zRot -= 360f;
+        float clampedZ = Mathf.Clamp(zRot / 90f, minZRotation, maxZRotation);
+        float normalizedZ = Mathf.InverseLerp(minZRotation, maxZRotation, clampedZ);
+        float twistAngle = Mathf.Lerp(minTwistAngle, maxTwistAngle, normalizedZ);
+
+        leftTrainerArm.localRotation = Quaternion.Euler(0f, twistAngle, 0f);
+    }
+
+    // Park inactive side at rest
+    void Park(Transform shoulder, Transform arm, float baseShoulderAngle)
+    {
+        if (shoulder) shoulder.localRotation = Quaternion.Euler(0f, 0f, baseShoulderAngle + minRaiseAngle);
+        if (arm)      arm.localRotation      = Quaternion.identity;
+    }
+
+    float NormalizeY(float y)
+    {
+        float clampedY = Mathf.Clamp(y, minY, maxY);
+        return Mathf.InverseLerp(minY, maxY, clampedY);
     }
 }

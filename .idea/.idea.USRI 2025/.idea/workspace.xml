@@ -6,16 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="85b2293a-9b22-49e0-8b2b-5f639b980170" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.USRI 2025/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimeGirls/BaseCharacter/Demo files/AC.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimeGirls/BaseCharacter/Demo files/AC.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CupGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CupGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HandGripAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HandGripAnimator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRaiseScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ArmRotationScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/CupTransferScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ElbowRotationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/ElbowRotationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/HandednessSelectorScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/HandednessSelectorScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/PhaseSelectionScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/PhaseSelectionScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/XR Interaction Toolkit/Scenes/TargetPracticeScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TargetSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TargetSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHand.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHand.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulatedHandController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TrainerArmRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TrainerArmRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TrainerArmTwister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TrainerArmTwister.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TrainerElbowRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TrainerElbowRotator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutVRBuild.main.obb" afterDir="false" />
     </list>
@@ -33,14 +35,19 @@
     <setting file="file://$PROJECT_DIR$/Assets/CupDropDebugger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CupDropDetector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CupGameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CupHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DebugRayLogger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DebugXRInputs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ElbowRotationTracker.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FollowRayOrigin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HandCupProximityGrabAndGrip.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HandGrabDebugger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandGripAnimator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandReachExtender.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandednessButtonHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandednessInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HandednessSelectorManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/LeftButtonHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuRayInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainMenuRestorer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -51,6 +58,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/PhaseMenuManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayerSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayHandPoseFollower.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RayHighlighter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayInputInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayPositionLogger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RayResetter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -72,6 +80,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/TrainerElbowRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TrainerIKFollower.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UnifiedRayInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/VisualOffset.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/WebXR/Scripts/TrainerDialogueManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/WebXR/Scripts/WebXRManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.interaction.toolkit@2.6.4/Runtime/Inputs/InputActionManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -1161,6 +1170,55 @@
       <workItem from="1754666658487" duration="645000" />
       <workItem from="1754668290621" duration="168000" />
       <workItem from="1754669003646" duration="55000" />
+      <workItem from="1754922645982" duration="393000" />
+      <workItem from="1754923166139" duration="106000" />
+      <workItem from="1754925542669" duration="150000" />
+      <workItem from="1754927984034" duration="42000" />
+      <workItem from="1754938547017" duration="82000" />
+      <workItem from="1755005881783" duration="220000" />
+      <workItem from="1755008164231" duration="90000" />
+      <workItem from="1755009030419" duration="260000" />
+      <workItem from="1755019405182" duration="55000" />
+      <workItem from="1755024284134" duration="233000" />
+      <workItem from="1755025279483" duration="69000" />
+      <workItem from="1755027420080" duration="88000" />
+      <workItem from="1755268996784" duration="601000" />
+      <workItem from="1755285684863" duration="963000" />
+      <workItem from="1755287433621" duration="163000" />
+      <workItem from="1755522929823" duration="969000" />
+      <workItem from="1755525157225" duration="200000" />
+      <workItem from="1755526899100" duration="74000" />
+      <workItem from="1755528557811" duration="33000" />
+      <workItem from="1755529163296" duration="173000" />
+      <workItem from="1755531427990" duration="99000" />
+      <workItem from="1755536437135" duration="46000" />
+      <workItem from="1755538242273" duration="395000" />
+      <workItem from="1755540091554" duration="341000" />
+      <workItem from="1755541092190" duration="37000" />
+      <workItem from="1755542203196" duration="604000" />
+      <workItem from="1755543635920" duration="49000" />
+      <workItem from="1755544219957" duration="273000" />
+      <workItem from="1755544958147" duration="44000" />
+      <workItem from="1755545966847" duration="45000" />
+      <workItem from="1755546331437" duration="32000" />
+      <workItem from="1755609250952" duration="701000" />
+      <workItem from="1755610695976" duration="230000" />
+      <workItem from="1755611681533" duration="187000" />
+      <workItem from="1755612506718" duration="38000" />
+      <workItem from="1755613465000" duration="116000" />
+      <workItem from="1755616154130" duration="123000" />
+      <workItem from="1755617105481" duration="220000" />
+      <workItem from="1755618080855" duration="52000" />
+      <workItem from="1755620648670" duration="69000" />
+      <workItem from="1755621423300" duration="87000" />
+      <workItem from="1755622956888" duration="290000" />
+      <workItem from="1755623571323" duration="99000" />
+      <workItem from="1755624119824" duration="375000" />
+      <workItem from="1755625387489" duration="43000" />
+      <workItem from="1755626120568" duration="154000" />
+      <workItem from="1755626633761" duration="219000" />
+      <workItem from="1755628977355" duration="302000" />
+      <workItem from="1755630061915" duration="232000" />
     </task>
     <servers />
   </component>

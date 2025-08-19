@@ -3,35 +3,89 @@ using UnityEngine.InputSystem;
 
 public class TrainerArmRotator : MonoBehaviour
 {
-    [Header("References")]
-    public Transform trainerArm;                 // The upper arm to rotate
-    public Transform shoulderJoint;              // Shoulder pivot (parent of trainerArm)
-    public InputActionProperty controllerPositionAction;
+    public enum HandMode { Right, Left, Auto }
 
-    [Header("Raise Settings")]
-    public float minRaiseAngle = 0f;
-    public float maxRaiseAngle = 75f;
-    public float minY = 1.0f;        // Adjust based on starting hand height
-    public float maxY = 2.0f;        // Adjust based on full raise height
+    [Header("Active Hand")]
+    public HandMode mode = HandMode.Auto;
+    [Range(0f, 1f)] public float autoSwitchThreshold = 0.05f; // hysteresis for Auto
+
+    [Header("Controller Positions (Input System)")]
+    public InputActionProperty rightControllerPositionAction; // <XRController>{RightHand}/devicePosition
+    public InputActionProperty leftControllerPositionAction;  // <XRController>{LeftHand}/devicePosition
+
+    [Header("Trainer Arm Bones")]
+    public Transform rightTrainerArm;      // upper-arm (right)
+    public Transform leftTrainerArm;       // upper-arm (left)
+
+    [Header("Raise Settings (same as your original)")]
+    public float minRaiseAngle = 0f;       // fully down
+    public float maxRaiseAngle = 75f;      // full raise
+    public float minY = 1.0f;              // start height
+    public float maxY = 2.0f;              // end height
+
+    [Header("Direction Tweaks")]
+    public bool invertLeftArm = true;      // ← turn ON if left moved down when controller went up
+    public bool invertRightArm = false;    // usually off
+
+    private HandMode _active = HandMode.Right;
+
+    void OnEnable()
+    {
+        rightControllerPositionAction.action?.Enable();
+        leftControllerPositionAction.action?.Enable();
+        _active = mode == HandMode.Auto ? HandMode.Right : mode;
+    }
+
+    void OnDisable()
+    {
+        rightControllerPositionAction.action?.Disable();
+        leftControllerPositionAction.action?.Disable();
+    }
 
     void LateUpdate()
     {
-        if (controllerPositionAction == null || trainerArm == null || shoulderJoint == null)
+        if (!rightTrainerArm || !leftTrainerArm) return;
+
+        Vector3 rPos = rightControllerPositionAction.action != null
+            ? rightControllerPositionAction.action.ReadValue<Vector3>() : Vector3.zero;
+        Vector3 lPos = leftControllerPositionAction.action != null
+            ? leftControllerPositionAction.action.ReadValue<Vector3>() : Vector3.zero;
+
+        float rNorm = NormalizeY(rPos.y);
+        float lNorm = NormalizeY(lPos.y);
+
+        if (mode == HandMode.Auto)
         {
-            Debug.LogWarning("[TrainerArmRotator] Missing references!");
-            return;
+            float diff = rNorm - lNorm;
+            if (_active == HandMode.Right && diff < -autoSwitchThreshold) _active = HandMode.Left;
+            else if (_active == HandMode.Left && diff > autoSwitchThreshold) _active = HandMode.Right;
         }
+        else _active = mode;
 
-        Vector3 controllerWorldPos = controllerPositionAction.action.ReadValue<Vector3>();
-        float controllerY = controllerWorldPos.y;
+        float rAngle = Mathf.Lerp(minRaiseAngle, maxRaiseAngle, rNorm) * (invertRightArm ? -1f : 1f);
+        float lAngle = Mathf.Lerp(minRaiseAngle, maxRaiseAngle, lNorm) * (invertLeftArm  ? -1f : 1f);
 
-        float clampedY = Mathf.Clamp(controllerY, minY, maxY);
-        float normalized = Mathf.InverseLerp(minY, maxY, clampedY);
-        float targetAngle = Mathf.Lerp(minRaiseAngle, maxRaiseAngle, normalized);
+        if (_active == HandMode.Right)
+        {
+            SetArmAngle(rightTrainerArm, rAngle);
+            SetArmAngle(leftTrainerArm,  minRaiseAngle);   // keep unused arm fully down
+        }
+        else // Left
+        {
+            SetArmAngle(leftTrainerArm,  lAngle);
+            SetArmAngle(rightTrainerArm, minRaiseAngle);   // keep unused arm fully down
+        }
+    }
 
-        // ✅ Rotate around Z to raise arm forward (instead of backward or sideways)
-        trainerArm.localRotation = Quaternion.Euler(0f, 0f, targetAngle);
+    float NormalizeY(float y)
+    {
+        float clampedY = Mathf.Clamp(y, minY, maxY);
+        return Mathf.InverseLerp(minY, maxY, clampedY);
+    }
 
-        Debug.Log($"[TrainerArmRotator] Y = {controllerY:F2}, Angle = {targetAngle:F2}");
+    void SetArmAngle(Transform arm, float angle)
+    {
+        // Your original axis: raise around Z
+        arm.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 }
