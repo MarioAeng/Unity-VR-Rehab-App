@@ -8,29 +8,27 @@ public class HandednessButtonHighlighter : MonoBehaviour
     [System.Serializable]
     public class ButtonBounds
     {
-        public GameObject buttonObject;
+        public GameObject buttonObject;     // was sceneName in your menu script
         public Vector2 centerLocalXY;
         public Vector2 size;
-        public Image image;
-
-        // New: track if currently highlighted
-        public bool isHighlighted = false;
+        public Image image;                 // For highlighting
     }
 
-    [Header("Left Hand Settings")]
-    public Transform leftHandTransform;
-    public InputActionProperty leftTriggerAction;
+    public Transform canvasTransform;
 
-    [Header("Right Hand Settings")]
+    [Header("Hand References")]
+    public Transform leftHandTransform;
     public Transform rightHandTransform;
+    public InputActionProperty leftTriggerAction;
     public InputActionProperty rightTriggerAction;
 
-    [Header("Shared Settings")]
-    public Transform canvasTransform;
     public Color normalColor = Color.white;
     public Color highlightColor = Color.green;
+
+    [Header("Ray Reach Settings")]
     public float yReachMultiplier = 2f;
 
+    private bool sceneLoading = false; // keep same flag to prevent double clicks
     private ButtonBounds[] buttons;
 
     void Start()
@@ -54,31 +52,31 @@ public class HandednessButtonHighlighter : MonoBehaviour
 
     void Update()
     {
-        if (canvasTransform == null) return;
-
-        // Reset highlight flags
-        foreach (var btn in buttons)
-            btn.isHighlighted = false;
-
-        HandleHand(leftHandTransform, leftTriggerAction, "Left");
-        HandleHand(rightHandTransform, rightTriggerAction, "Right");
-
-        // Apply highlight colors based on flags
-        foreach (var btn in buttons)
+        if (sceneLoading || canvasTransform == null)
         {
-            if (btn.image != null)
-                btn.image.color = btn.isHighlighted ? highlightColor : normalColor;
+            Debug.LogWarning("[HandednessButtonHighlighter] 🚫 Missing canvas or click in progress.");
+            return;
         }
+
+        // IMPORTANT: call Right first, then Left so Left wins if both overlap
+        HandleHand(rightHandTransform, rightTriggerAction, "👉 Right");
+        HandleHand(leftHandTransform,  leftTriggerAction,  "👈 Left");
     }
 
     void HandleHand(Transform handTransform, InputActionProperty triggerAction, string handLabel)
     {
-        if (handTransform == null || triggerAction.action == null) return;
+        if (sceneLoading || handTransform == null || triggerAction.action == null)
+            return;
 
         Vector3 handLocal = canvasTransform.InverseTransformPoint(handTransform.position);
         handLocal.y *= yReachMultiplier;
 
-        bool triggerPressed = triggerAction.action.WasPressedThisFrame();
+        float triggerValue = triggerAction.action.ReadValue<float>();
+        bool triggerPressed = triggerValue > 0.5f;
+
+        Debug.Log($"[{handLabel}] ✋ Hand Local: {handLocal}, Trigger: {triggerValue:F2}");
+
+        ButtonBounds matchedButton = null;
 
         foreach (var btn in buttons)
         {
@@ -87,24 +85,39 @@ public class HandednessButtonHighlighter : MonoBehaviour
             Vector2 half = btn.size * 0.5f;
             float dx = Mathf.Abs(handLocal.x - btn.centerLocalXY.x);
             float dy = Mathf.Abs(handLocal.y - btn.centerLocalXY.y);
-            bool inBounds = dx <= half.x && dy <= half.y;
+            bool inX = dx <= half.x;
+            bool inY = dy <= half.y;
 
-            if (inBounds)
+            if (inX && inY)
             {
-                btn.isHighlighted = true;
-                Debug.Log($"[Highlight] ✅ {handLabel} matched {btn.buttonObject.name}");
-
-                if (triggerPressed)
-                {
-                    Debug.Log($"[UI Click] 🖱️ {handLabel} triggered OnClick for {btn.buttonObject.name}");
-
-                    ExecuteEvents.Execute<IPointerClickHandler>(
-                        target: btn.buttonObject,
-                        eventData: new PointerEventData(EventSystem.current),
-                        functor: ExecuteEvents.pointerClickHandler
-                    );
-                }
+                matchedButton = btn;
+                Debug.Log($"[{handLabel}] 🎯 Hovered over {btn.buttonObject.name}");
+                break;
             }
+        }
+
+        // Set colors based on THIS hand's match (the later hand call wins, like your original)
+        foreach (var btn in buttons)
+        {
+            if (btn.image != null)
+                btn.image.color = (btn == matchedButton) ? highlightColor : normalColor;
+        }
+
+        if (triggerPressed && matchedButton != null)
+        {
+            Debug.Log($"[{handLabel}] ✅ Clicking {matchedButton.buttonObject.name}");
+            sceneLoading = true; // reuse to debounce double-press
+            ExecuteEvents.Execute<IPointerClickHandler>(
+                target: matchedButton.buttonObject,
+                eventData: new PointerEventData(EventSystem.current),
+                functor: ExecuteEvents.pointerClickHandler
+            );
+            // allow another click next frame
+            sceneLoading = false;
+        }
+        else if (triggerPressed && matchedButton == null)
+        {
+            Debug.Log($"[{handLabel}] ❌ Trigger pressed but no button matched.");
         }
     }
 }

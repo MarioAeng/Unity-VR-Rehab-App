@@ -1285,6 +1285,12 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   yReachMultiplier: 2
+  boundsGrow: 60
+  useRayProjection: 1
+  rayAxis: 0
+  maxRayDistance: 10
+  autoRecalcEachFrame: 0
+  verboseLogs: 1
 --- !u!1 &954437064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4367,6 +4373,12 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   yReachMultiplier: 2
+  boundsGrow: 60
+  useRayProjection: 1
+  rayAxis: 0
+  maxRayDistance: 10
+  autoRecalcEachFrame: 0
+  verboseLogs: 1
 --- !u!114 &1962846448
 MonoBehaviour:
   m_ObjectHideFlags: 0

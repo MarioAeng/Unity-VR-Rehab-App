@@ -182,8 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23dfafaaf72586247891b1af8e92cb75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 2
+  rightHandOrigin: {fileID: 863868554}
+  leftHandOrigin: {fileID: 1667091544}
+  cameraRelativeSpawning: 1
   targetPrefab: {fileID: 1606765376499480060, guid: 4fbacfbf74971304e808d3f05391adb7, type: 3}
-  handOrigin: {fileID: 863868554}
   repCounterText: {fileID: 1026795884}
   trainerPromptText: {fileID: 1409021839}
   levelText: {fileID: 1382912734}
